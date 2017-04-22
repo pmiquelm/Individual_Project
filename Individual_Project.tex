@@ -1,0 +1,235 @@
+% !TEX TS-program = Extended Essay
+\documentclass[11pt ,twoside]{article}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{mathptmx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{siunitx}
+\usepackage{filecontents}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[sectionbib,square, numbers]{natbib}
+\usepackage{multibib}
+\usepackage[labelfont=sc]{caption}
+\usepackage{verbatim}
+\usepackage{setspace}
+\usepackage{todonotes}
+\usepackage{blkarray}
+\usepackage{kbordermatrix2b}
+\usepackage{soul}
+\usepackage{xfrac}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=38mm,
+ right=19mm}
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+    
+\usepackage{draftwatermark}
+\SetWatermarkText{V 0.1}
+\SetWatermarkScale{2}
+\setlength{\headheight}{14pt}
+
+\usepackage{lineno}
+\linenumbers
+
+
+\numberwithin{equation}{section}
+\newcites{bibliography}{Additional Reading}
+
+
+
+\newcommand{\candidatenum}{28023668} % Change to appropriate
+\newcommand{\candidate}{Miquel \candidatenum}
+
+
+\microtypecontext{spacing=nonfrench}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% This is where the document really begins%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%TC:ignore
+
+\pagenumbering{gobble}
+
+\title{Individual Project}
+\author{
+Word count: \input{wordcount.txt}\\ \\
+\vspace{0.1cm}
+Pau Miquel Mir\\
+\vspace{0.1cm}
+\candidatenum \\
+}
+\date{May 2018}
+\maketitle
+
+\afterpage{\blankpage}
+\newpage
+\afterpage{\blankpage}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\candidate}
+\lhead{ABSTRACT}
+\cfoot{\thepage}
+
+\pagenumbering{roman}
+
+
+\begin{abstract}
+\addcontentsline{toc}{section}{Abstract}%
+
+This is the abstract.
+\end{abstract}
+
+\newpage
+
+\afterpage{\blankpage}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\candidate}
+\lhead{ACKNOWLEDGEMENTS}
+\cfoot{\thepage}
+
+\renewcommand{\abstractname}{Acknowledgements}
+\begin{abstract}	
+\addcontentsline{toc}{section}{Acknowledgements}%
+
+%======Acknowledgements============
+I want to thank my advisor for his time and dedication.
+
+
+ 
+ I also want to thank my parents, for their constant support and for proofreading the paper. 
+
+%======Acknowledgements============
+
+\end{abstract}
+
+
+\newpage
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\candidate}
+\lhead{CONTENTS}
+\cfoot{\thepage}
+%TC:endignore
+\newpage
+\setcounter{tocdepth}{3}
+
+\tableofcontents
+
+\afterpage{\blankpage}
+
+\newpage
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\candidate}
+\lhead{\leftmark}
+\cfoot{\thepage}
+
+\pagenumbering{arabic}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%Start extended essay here. Nothing before counts%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Introduction}
+
+These are four words. These are four more. And another 3. \cite{cycling}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%% End extended essay here. Nothing afterwards counts%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%TC:ignore
+
+
+%Works Cited
+\clearpage
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\candidate}
+\lhead{REFERENCES}
+\cfoot{\thepage}
+
+\addcontentsline{toc}{section}{References}
+%\renewcommand{\refname}{Works Cited}
+\bibliographystyle{unsrtnat}
+\bibliography{./cite}
+
+
+\clearpage
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\candidate}
+\lhead{ADDITIONAL READING}
+\cfoot{\thepage}
+
+\addcontentsline{toc}{section}{Additional Reading}
+\renewcommand{\refname}{Additional Reading}
+
+\setcitestyle{authoryear}
+\bibliographystylebibliography{plainnat}
+\bibliographybibliography{bib}
+\nocitebibliography{*}
+
+
+\clearpage
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\candidate}
+\lhead{APPENDICES}
+\cfoot{\thepage}
+
+%Appendices
+\setcounter{subsection}{0}
+\section*{Appendices}%%%%%%%%%%%%% Not numbered 
+\addcontentsline{toc}{section}{Appendices}%%but in TOC
+
+\renewcommand\thesubsection{A\kern 0.16em\arabic{subsection}} %Change numbering style with custom spacing
+
+%Start new Appendix here
+
+\subsection{Appendix 1}
+\label{app:placeholder}%TC:endignore
+\end{document}
+
+
+

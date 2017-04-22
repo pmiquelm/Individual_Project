@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Beale(1955)]{cycling}
+E.M.L. Beale.
+\newblock Cycling in the dual simplex algorithm.
+\newblock \emph{Naval Research Logistics Quarterly}, 2\penalty0 (4):\penalty0
+  269--275, 1955.
+\newblock ISSN 1931-9193.
+\newblock \doi{10.1002/nav.3800020406}.
+
+\end{thebibliography}
