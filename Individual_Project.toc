@@ -1,8 +1,0 @@
-\select@language {english}
-\contentsline {section}{Abstract}{i}
-\contentsline {section}{Acknowledgements}{ii}
-\contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {section}{References}{2}
-\contentsline {section}{Additional Reading}{3}
-\contentsline {section}{Appendices}{4}
-\contentsline {subsection}{\numberline {A\kern 0.16em1}Appendix 1}{4}
