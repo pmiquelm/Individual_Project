@@ -13,6 +13,7 @@
 \usepackage{fancyhdr}
 \usepackage{url}
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\microtypecontext{spacing=nonfrench}
 \usepackage{siunitx}
 \usepackage{filecontents}
 \usepackage{booktabs}
@@ -24,7 +25,7 @@
 \usepackage{setspace}
 \usepackage{todonotes}
 \usepackage{blkarray}
-\usepackage{kbordermatrix2b}
+%\usepackage{kbordermatrix2b}
 \usepackage{soul}
 \usepackage{xfrac}
 \usepackage{caption}
@@ -34,34 +35,43 @@
  a4paper,
  left=38mm,
  right=19mm}
-\usepackage{afterpage}
+\usepackage{minted}
+\usemintedstyle{arduino}
+\usepackage{emptypage}
+\usepackage{lineno}
 
-\newcommand\blankpage{%
-    \null
-    \thispagestyle{empty}%
-    \addtocounter{page}{-1}%
-    \newpage}
-    
-\usepackage{draftwatermark}
-\SetWatermarkText{V 0.1}
-\SetWatermarkScale{2}
 \setlength{\headheight}{14pt}
 
-\usepackage{lineno}
-\linenumbers
 
+\graphicspath{{./figs/}}
 
 \numberwithin{equation}{section}
+
 \newcites{bibliography}{Additional Reading}
 
-
-
 \newcommand{\candidatenum}{28023668} % Change to appropriate
-\newcommand{\candidate}{Miquel \candidatenum}
+\newcommand{\candidate}{Miquel Mir \candidatenum}
+
+% Compute the time in hours and minutes; make new variables \timehh and \timemm
+\newcount\timehh\newcount\timemm
+\timehh=\time 
+\divide\timehh by 60 \timemm=\time
+\count255=\timehh\multiply\count255 by -60 \advance\timemm by \count255
+% Now make a string with date and time
+\newcommand{\dateandtime}{\today \ --
+  \ifnum\timehh<10 0\fi\number\timehh:\ifnum\timemm<10 0\fi\number\timemm}
 
 
-\microtypecontext{spacing=nonfrench}
+\pagestyle{fancy}\fancyhead{} % clear all header fields\fancyhead[RO,LE]{\candidate}
+\fancyhead[LO,RE]{\leftmark}\fancyfoot{} % clear all footer fields\fancyfoot[CE,CO]{\thepage}
 
+\newcommand{\draft}{
+\linenumbers
+\fancyhead[CO,CE]{\fbox{\textsf\bfseries DRAFT}}
+\fancyfoot[LE,RO]{\dateandtime}
+}
+
+\draft
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % This is where the document really begins%
@@ -83,95 +93,111 @@ Pau Miquel Mir\\
 \candidatenum \\
 }
 \date{May 2018}
+
 \maketitle
 
-\afterpage{\blankpage}
-\newpage
-\afterpage{\blankpage}
+\cleardoublepage
 
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{\candidate}
-\lhead{ABSTRACT}
-\cfoot{\thepage}
 
 \pagenumbering{roman}
 
 
+
 \begin{abstract}
+\markboth{ABSTRACT}{ABSTRACT}
 \addcontentsline{toc}{section}{Abstract}%
+%==========Abstract============
 
 This is the abstract.
+%==========Abstract============
+
 \end{abstract}
 
-\newpage
 
-\afterpage{\blankpage}
 
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{\candidate}
-\lhead{ACKNOWLEDGEMENTS}
-\cfoot{\thepage}
+\cleardoublepage
+% \addtocounter{page}{-1}%
+
+
 
 \renewcommand{\abstractname}{Acknowledgements}
 \begin{abstract}	
+\markboth{ACKNOWLEDGEMENTS}{ACKNOWLEDGEMENTS}
 \addcontentsline{toc}{section}{Acknowledgements}%
 
-%======Acknowledgements============
+%======Acknowledgements=======
 I want to thank my advisor for his time and dedication.
 
 
  
  I also want to thank my parents, for their constant support and for proofreading the paper. 
 
-%======Acknowledgements============
+%======Acknowledgements======
 
 \end{abstract}
 
 
-\newpage
+\cleardoublepage
 
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{\candidate}
-\lhead{CONTENTS}
-\cfoot{\thepage}
+
 %TC:endignore
-\newpage
+
 \setcounter{tocdepth}{3}
 
 \tableofcontents
 
-\afterpage{\blankpage}
 
-\newpage
-
-
-
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{\candidate}
-\lhead{\leftmark}
-\cfoot{\thepage}
+\cleardoublepage
 
 \pagenumbering{arabic}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%%Start extended essay here. Nothing before counts%%%%%%
+%%%%% Start Individual Project here. Nothing before counts %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Introduction}
+\label{seq:Introduction}
 
-These are four words. These are four more. And another 3. \cite{cycling}
+These are four words. These are four more. And another 3.  Two more. And now 4 more. This is come more stuff \cite{cycling}. Mike is a bit of a moron, and he likes this book \cite{Mike}. This can be seen in Fig. \ref{fig:coins}.
+
+
+This is a new paragraph.
+\begin{equation}
+3 + 3 = 6
+\end{equation}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{caca.jpg}
+\caption{Some coins}
+\label{fig:coins}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{caca.jpg}
+\caption{Some coins}
+\label{fig:coins}
+\end{center}
+\end{figure}
+
+
+
+\section{Conclusion} 
+\label{seq:Conclusion}
+
+\subsection{Future Work} 
+\label{seq:Future Work}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%% End extended essay here. Nothing afterwards counts%%%%
+% %%% End Individual Project here. Nothing afterwards counts%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -182,24 +208,13 @@ These are four words. These are four more. And another 3. \cite{cycling}
 %Works Cited
 \clearpage
 
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{\candidate}
-\lhead{REFERENCES}
-\cfoot{\thepage}
 
 \addcontentsline{toc}{section}{References}
 %\renewcommand{\refname}{Works Cited}
 \bibliographystyle{unsrtnat}
 \bibliography{./cite}
 
-
 \clearpage
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{\candidate}
-\lhead{ADDITIONAL READING}
-\cfoot{\thepage}
 
 \addcontentsline{toc}{section}{Additional Reading}
 \renewcommand{\refname}{Additional Reading}
@@ -209,26 +224,22 @@ These are four words. These are four more. And another 3. \cite{cycling}
 \bibliographybibliography{bib}
 \nocitebibliography{*}
 
-
 \clearpage
-
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{\candidate}
-\lhead{APPENDICES}
-\cfoot{\thepage}
 
 %Appendices
 \setcounter{subsection}{0}
-\section*{Appendices}%%%%%%%%%%%%% Not numbered 
+\section*{Appendices}%%%%%%%%%%%% Not numbered 
+\markboth{APPENDICES}{APPENDICES}
 \addcontentsline{toc}{section}{Appendices}%%but in TOC
 
 \renewcommand\thesubsection{A\kern 0.16em\arabic{subsection}} %Change numbering style with custom spacing
 
-%Start new Appendix here
 
+%Start new Appendix here
 \subsection{Appendix 1}
-\label{app:placeholder}%TC:endignore
+\label{app:placeholder}
+\inputminted[linenos, baselinestretch=0.9, fontsize=\footnotesize]{c}{code/prova.C}
+%TC:endignore
 \end{document}
 
 
