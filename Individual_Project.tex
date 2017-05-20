@@ -1,4 +1,4 @@
-% !TEX TS-program = Extended Essay
+% !TEX TS-program = Custom
 \documentclass[11pt ,twoside]{article}
 \usepackage[english]{babel}
 \usepackage{graphicx}
@@ -40,7 +40,7 @@
 \usepackage{emptypage}
 \usepackage{lineno}
 
-\setlength{\headheight}{14pt}
+\setlength{\headheight}{15pt}
 
 
 \graphicspath{{./figs/}}
@@ -62,8 +62,12 @@
   \ifnum\timehh<10 0\fi\number\timehh:\ifnum\timemm<10 0\fi\number\timemm}
 
 
-\pagestyle{fancy}\fancyhead{} % clear all header fields\fancyhead[RO,LE]{\candidate}
-\fancyhead[LO,RE]{\leftmark}\fancyfoot{} % clear all footer fields\fancyfoot[CE,CO]{\thepage}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[RO,LE]{\candidate}
+\fancyhead[LO,RE]{\leftmark}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[CE,CO]{\thepage}
 
 \newcommand{\draft}{
 \linenumbers
@@ -101,8 +105,6 @@ Pau Miquel Mir\\
 
 \pagenumbering{roman}
 
-
-
 \begin{abstract}
 \markboth{ABSTRACT}{ABSTRACT}
 \addcontentsline{toc}{section}{Abstract}%
@@ -113,11 +115,7 @@ This is the abstract.
 
 \end{abstract}
 
-
-
 \cleardoublepage
-% \addtocounter{page}{-1}%
-
 
 
 \renewcommand{\abstractname}{Acknowledgements}
@@ -127,8 +125,6 @@ This is the abstract.
 
 %======Acknowledgements=======
 I want to thank my advisor for his time and dedication.
-
-
  
  I also want to thank my parents, for their constant support and for proofreading the paper. 
 
@@ -136,69 +132,33 @@ I want to thank my advisor for his time and dedication.
 
 \end{abstract}
 
-
 \cleardoublepage
 
-
-%TC:endignore
 
 \setcounter{tocdepth}{3}
 
 \tableofcontents
 
-
 \cleardoublepage
+
 
 \pagenumbering{arabic}
 
+%TC:endignore
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Start Individual Project here. Nothing before counts %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \section{Introduction}
-\label{seq:Introduction}
-
-These are four words. These are four more. And another 3.  Two more. And now 4 more. This is come more stuff \cite{cycling}. Mike is a bit of a moron, and he likes this book \cite{Mike}. This can be seen in Fig. \ref{fig:coins}.
-
-
-This is a new paragraph.
-\begin{equation}
-3 + 3 = 6
-\end{equation}
-
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{caca.jpg}
-\caption{Some coins}
-\label{fig:coins}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{caca.jpg}
-\caption{Some coins}
-\label{fig:coins}
-\end{center}
-\end{figure}
+\label{sec:introduction}
+\input{tex/introduction.tex}
 
 
 
-\section{Conclusion} 
-\label{seq:Conclusion}
 
-\subsection{Future Work} 
-\label{seq:Future Work}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %%% End Individual Project here. Nothing afterwards counts%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
