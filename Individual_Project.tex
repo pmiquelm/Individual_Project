@@ -1,103 +1,11 @@
 % !TEX TS-program = Custom
-\documentclass[11pt, twoside]{article}
-\usepackage[english]{babel}
-\usepackage{graphicx}
-\setkeys{Gin}{draft=false}
-\usepackage{subfigure}
-\usepackage{mathptmx}
-\usepackage{mathtools}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{latexsym}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{fancyhdr}
-\usepackage{url}
-\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
-\microtypecontext{spacing=nonfrench}
-\usepackage{siunitx}
-\usepackage{filecontents}
-\usepackage{booktabs}
-\usepackage{multirow}
-%\usepackage[sectionbib,square, numbers]{natbib}
-%\usepackage[numbers]{natbib}
-\usepackage[style=ieee, backend=biber]{biblatex}
-\addbibresource{Individual_Project.bib}
-%\usepackage{multibib}
-\usepackage[labelfont=sc,font=small, margin=\parindent]{caption}
-\usepackage{verbatim}
-\usepackage{setspace}
-\usepackage{todonotes}
-\usepackage{blkarray}
-%\usepackage{kbordermatrix2b}
-\usepackage{soul}
-\usepackage{xfrac}
-\usepackage{caption}
-\usepackage{tikz}
-\usepackage{geometry}
- \geometry{
- a4paper,
- left=38mm,
- right=19mm,
- top=20mm,
- bottom=20mm,
- headheight=15pt, % as per the warning by fancyhdr
- includehead,includefoot,
- heightrounded
- }
-\usepackage{minted}
-\usemintedstyle{arduino}
-\usepackage{emptypage}
-\usepackage{lineno}
-\usepackage{setspace}
-\onehalfspacing
-\usepackage[linktoc=all]{hyperref}
-\usepackage[nonumberlist, toc, acronyms,nopostdot]{glossaries}
-\loadglsentries{tex/Acronyms.tex}
-\makenoidxglossaries
-\usepackage{csquotes}
-\usepackage{ifdraft}
-\usepackage{blindtext}
+\documentclass[11pt, twoside, draft]{article}
 
-\graphicspath{{./figs/}}
-
-\numberwithin{equation}{section}
-
-\newcommand{\candidatenum}{28023668} % Change to appropriate
-\newcommand{\candidate}{Pau Miquel Mir \candidatenum}
-
-% Compute the time in hours and minutes; make new variables \timehh and \timemm
-\newcount\timehh\newcount\timemm
-\timehh=\time 
-\divide\timehh by 60 \timemm=\time
-\count255=\timehh\multiply\count255 by -60 \advance\timemm by \count255
-% Now make a string with date and time
-\newcommand{\dateandtime}{\today \ --
-  \ifnum\timehh<10 0\fi\number\timehh:\ifnum\timemm<10 0\fi\number\timemm}
-
-
-\pagestyle{fancy}
-\fancyhead{} % clear all header fields
-\fancyhead[RO,LE]{\candidate}
-\fancyhead[LO,RE]{\leftmark}
-\fancyfoot{} % clear all footer fields
-\fancyfoot[CE,CO]{\thepage}
-
-%\newcommand{\draft}{
-\ifdraft{
-\usepackage[inner]{showlabels}
-\showlabels{autocite}
-\linenumbers
-\fancyhead[CO,CE]{\fbox{\textsf\bfseries DRAFT}}
-\fancyfoot[LE,RO]{\dateandtime}
-}
-
-%\draft
+\usepackage{Individual_Project}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % This is where the document really begins%
 %%%%%%%%%%%%%%%%%%%%%%%
-
 
 \begin{document}
 
@@ -181,14 +89,14 @@ I confirm that:
 
 \end{abstract}
 
-\cleardoublepage
+\clearpage
 
 
 \setcounter{tocdepth}{3}
 
 \tableofcontents
 
-\cleardoublepage
+\clearpage
 
 
 \pagenumbering{arabic}
@@ -207,6 +115,8 @@ I confirm that:
 \section{Introduction}
 \label{sec:introduction}
 \input{tex/Introduction.tex}
+
+%
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -258,15 +168,6 @@ I confirm that:
 \printbibliography
 \addcontentsline{toc}{section}{References}
 
-\clearpage
-
-%\addcontentsline{toc}{section}{Additional Reading}
-%\renewcommand{\refname}{Additional Reading}
-
-%\setcitestyle{authoryear}
-%\bibliographystylebibliography{plainnat}
-%\bibliographybibliography{bib}
-%\nocitebibliography{*}
 
 %TC:endignore
 \end{document}

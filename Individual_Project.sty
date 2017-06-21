@@ -1,0 +1,92 @@
+% !TEX root = Individual_Project.tex
+\ProvidesPackage{Individual_Project}
+
+\RequirePackage[english]{babel}
+\RequirePackage{graphicx}
+\setkeys{Gin}{draft=false}
+\RequirePackage{subfigure}
+\RequirePackage{mathptmx}
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{latexsym}
+\RequirePackage{array}
+\RequirePackage{longtable}
+\RequirePackage{fancyhdr}
+\RequirePackage{url}
+\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\microtypecontext{spacing=nonfrench}
+\RequirePackage{siunitx}
+\RequirePackage{filecontents}
+\RequirePackage{booktabs}
+\RequirePackage{multirow}
+\RequirePackage[style=ieee, backend=biber]{biblatex}
+\addbibresource{Individual_Project.bib}
+\RequirePackage[labelfont=sc,font=small, margin=\parindent]{caption}
+\RequirePackage{verbatim}
+\RequirePackage{setspace}
+\RequirePackage{todonotes}
+\RequirePackage{blkarray}
+%\RequirePackage{kbordermatrix2b}
+\RequirePackage{soul}
+\RequirePackage{xfrac}
+\RequirePackage{caption}
+\RequirePackage{tikz}
+\RequirePackage{geometry}
+ \geometry{
+ a4paper,
+ left=38mm,
+ right=19mm,
+ top=20mm,
+ bottom=20mm,
+ headheight=15pt, % as per the warning by fancyhdr
+ includehead,includefoot,
+ heightrounded
+ }
+\RequirePackage{minted}
+\usemintedstyle{arduino}
+
+\RequirePackage{emptypage}
+\RequirePackage{lineno}
+\RequirePackage{setspace}
+\onehalfspacing
+\RequirePackage[linktoc=all]{hyperref}
+\RequirePackage[nonumberlist, toc, acronyms,nopostdot]{glossaries}
+\loadglsentries{tex/Acronyms.tex}
+\makenoidxglossaries
+\RequirePackage{csquotes}
+\RequirePackage{ifdraft}
+\RequirePackage{blindtext}
+
+\graphicspath{{./figs/}}
+
+\numberwithin{equation}{section}
+
+\newcommand{\candidatenum}{28023668} % Change to appropriate
+\newcommand{\candidate}{Pau Miquel Mir \candidatenum}
+
+% Compute the time in hours and minutes; make new variables \timehh and \timemm
+\newcount\timehh\newcount\timemm
+\timehh=\time 
+\divide\timehh by 60 \timemm=\time
+\count255=\timehh\multiply\count255 by -60 \advance\timemm by \count255
+% Now make a string with date and time
+\newcommand{\dateandtime}{\today \ --
+  \ifnum\timehh<10 0\fi\number\timehh:\ifnum\timemm<10 0\fi\number\timemm}
+
+%Header commands
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[RO,LE]{\leftmark}
+\fancyhead[LO,RE]{\candidate}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[CE,CO]{\thepage}
+
+\ifdraft{
+\RequirePackage[inner]{showlabels}
+\showlabels{autocite}
+\linenumbers
+\fancyhead[CO,CE]{\fbox{\textsf\bfseries DRAFT}}
+\fancyfoot[LE,RO]{\dateandtime}
+}
+
