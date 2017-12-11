@@ -1,5 +1,5 @@
 % !TEX TS-program = Custom
-\documentclass[11pt, twoside]{article}
+\documentclass[11pt, twoside, draft]{article}
 
 \usepackage{Individual_Project}
 
@@ -99,12 +99,14 @@ I confirm that:
 \clearpage
 
 
-\pagenumbering{arabic}
-
+\addcontentsline{toc}{section}{Acronyms}%
 \printnoidxglossaries
+
+
 
 \cleardoublepage
 
+\pagenumbering{arabic}
 
 %TC:endignore
 
@@ -118,9 +120,22 @@ I confirm that:
 
 %
 
-\section{Conclusion}
-\label{sec:conclusion}
-\input{tex/Conclusion.tex}
+\section{Background}
+\label{sec:background}
+\input{tex/Background.tex}
+
+%
+
+\section{Formulation}
+\label{sec:formulation}
+\input{tex/Formulation}
+
+% 
+
+
+%\section{Conclusion}
+%\label{sec:conclusion}
+%\input{tex/Conclusion.tex}
 
 
 
@@ -152,14 +167,15 @@ I confirm that:
 
 %Appendices
 
-\section{Prova}
-\label{app:prova}
-\input{tex/Prova.tex}
+
+%\section{Prova}
+%\label{app:prova}
+%\input{tex/Prova.tex}
 
 %
 
-\section{Eurobot Code}
-\label{app:placeholder}
+\section{Filling Code}
+\label{app:filling_code}
 \inputminted[xleftmargin=\parindent,linenos, baselinestretch=0.9, fontsize=\footnotesize]{c}{code/caca.txt}
 
 
@@ -169,6 +185,9 @@ I confirm that:
 \printbibliography
 \addcontentsline{toc}{section}{References}
 
+\clearpage
+
+\listoftodos
 
 %TC:endignore
 \end{document}

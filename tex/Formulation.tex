@@ -1,0 +1,51 @@
+% !TEX root = ../Individual_Project.tex
+% Formulation
+
+
+% Governing equation for mass and internal energy
+%dm/dt du/dt
+
+
+
+%%%%%%%%
+%%%%%%%%
+%%%%%%%%
+
+\subsection{Heat transfer across cylinder}
+
+The main mode of heat transfer that occurs in the cylinder and that will be used throughout this report is heat conduction through the wall of the cylinder. This is modeled using:
+\begin{equation}
+\frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T }{\partial x^2}
+\end{equation}
+where $a$ is the thermal diffusivity, which is defined by :
+\begin{equation}
+\alpha = \frac{k}{\rho c}
+\end{equation}
+where $k$ is the material's thermal conductivity, $\rho$ is the density of the material, and $c$ is the specific heat capacity of the material.
+
+This differential equation will be solved using forward Euler time integration as described in Section \ref{sec:numerical_methods}
+
+\subsection{Gas flow into cylinder}
+
+The nozzle and corresponding gas flow will be modeled using isentropic relations, and then a discharge coefficient relationship will be used to find the approximate real values. Indeed, the isentropic Reynold's number is first calculated as follows:
+
+\begin{equation}
+\text{Re}_{\text{ideal}} = \frac{\rho_{\text{exit}}\;d_{\text{inlet}}\;u_{\text{exit}}}{\mu_{\text{exit}}}
+\end{equation}
+where $\rho_{\text{exit}}$, $d_{\text{inlet}}$, $u_{\text{exit}}$, and $\mu_{\text{exit}}$ are determined using real gas models as described in Section \ref{sec:property_models}. In order to find the real mass flow an empirical discharge coefficient is employed:
+
+\begin{equation}
+\text{CD} = \frac{\dot{m}_{\text{in}}}{\dot{m}_{\text{ideal}}} = A + B \:\text{Re}_{\text{ideal}} 
+\end{equation}
+A discharge coefficient must be used to account for the formation of a boundary layer inside the inlet tube. The empirical model that was used was obtained from \todo{Citation}, and uses the following values:
+
+\begin{equation}
+A =  0.938 ,  \quad B = -2.71
+\end{equation}
+
+
+\subsection{Hysteresis}
+
+\subsection{Throttling}
+
+\subsection{Optimization}

@@ -1,0 +1,132 @@
+% !TEX root = ../Individual_Project.tex
+% Background
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Vehicles and objectives}
+
+We must firstly consider what real-world relevance of this project is. As explained in Section \ref{sec:introduction}, the hydrogen cylinders being considered are for road vehicles. 
+
+\subsubsection{Material constraints}
+
+The main reason that a problem exists, and consequently this paper (and much other work) is being undertaken, is the material limitations that exist in hydrogen cylinders. Indeed, the cylinders that are used for high pressure scenarios such as the one we are presented with, are constructed with a composite material such as carbon fibre or glass/aramid fibre. In addition, they have a liner that is made out of metal, typically aluminum, in Type III cylinders, and out of a thermoplastic material for Type IV cylinders. Of concern is the composite material, as the polymer matrix cannot withstand high temperatures, and as such the material properties of the cylinder will begin to degrade. The specific temperature at which this occurs is usually around the glass transition temperature of the epoxy, where the thermosetting polymer changes from a hard "glassy" state to a more compliant "rubbery" state.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Previous work}
+
+
+
+We must first establish a baseline of previous work that has been conducted in this field, and subsequently analyze the shortcomings that exist in order to direct the research.
+
+\subsubsection{Modeling Work}
+A large amount of research has been conducted using multidimensional analysis, especially using \gls{cfd}. Indeed, there is myriad papers describing different methods and setups, such as Dicken and M\'erida's work, which uses the standard  k-$\epsilon$ turbulence model  and the Redlich-Kwong real gas equation of state for real gas properties \cite{Dicken2007a}. 
+Some of these models use more advanced property models, such as the model presented by Zhao et al., which employs REFPROP (see Section \ref{sec:property_models}) in order to have more precise real gas properties \cite{Zhao2012}.
+
+\subsubsection{Experimental work}
+\label{sec:experimental_work}
+Several papers describe experimental work that has been conducted regarding the fast-filling of hydrogen cylinders, in particular comparing the results to simulations. Dicken and M\'erida's work indicates that the temperature inside the cylinder is rather uniform \cite{Dicken2007}. This claim is not, however supported by the work of  Zheng et al \todo{Citation} nor that of Woodfield et al \cite{Woodfield2008}, wherein large discrepancies among gas temperatures in different regions of the cylinder are found.
+
+\subsubsection{Analysis}
+
+% Are the models that we have right? 
+% Are they as quick as they could be?
+% What range of non dimensional numbers does this apply to
+% Compare CFD to 1d, do they apply to the same ranges
+% Seeing as we have real gas properties, the fact that it's high pressure shouldn't matter
+% Therefore it's just constrained by geometric properties
+% CFD deals better with hysteresis and geometry
+
+The simulation work that has been conducted can be, in broad terms, divided into complex CFD models and more simplified 0-dimensional models. It is important analyze the difference between these two systems. The main advantage of reduced dimension models is that they are much less computationally expensive. This, in turn, means it can be incorporated as part of a larger analysis, in which it must be run multiple times, such as optimization routines or probabilistic whole station models.
+
+Reduced dimension models assume a constant gas temperature, which, as outlined in Section \ref{sec:experimental_work}, is supported by some experimental work, but refuted by others. For this reason, more research should be conducted to validate the uniform gas temperature approximation.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cylinder filling models}
+
+Several ways of modeling the cylinder can be considered when analysing their filling, with varying complexity and accuracy.
+
+\subsubsection{Zonal}
+
+A zonal model, also referred to as a 0-dimensional model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations, 
+
+\subsubsection{Multidimensional}
+
+More complex multidimensional models can be created, either 2D axisymmetric models or full 3D models. 2D models will not include the effects of gravity or buoyoncy, but 
+
+\label{sec:multidimensional}
+
+%%%%%%%%
+%%%%%%%%
+%%%%%%%%
+\subsection{Heat transfer models}
+
+In order to successfully analyze the behaviour of the system as a whole we must consider several local heat transfer methods that occur at different places inside of the cylinder.
+
+
+
+\subsubsection{Impinging jet}
+
+ The first behaviour that we will consider is that of an impinging jet of fluid onto a surface. 
+ 
+ 
+ \begin{figure}[h]
+\begin{centering}
+\caption{Impinging jet}
+\label{fig:inpinging_jet}
+\end{centering}
+\end{figure}
+
+
+ 
+\subsubsection{Pipe flow}
+
+A second behaviour that we will consider is that of pipe flow. This behaviour has been the focus of much research, as it is arguably the most common mode of heat transfer that occurs in most fluid systems.
+
+\subsubsection{Turbulent Jets}
+
+Lastly, we must also consider turbulent jets, as there will be such a situation at the exit of the nozzle. 
+
+% Pope 2000 Cambridge University Press
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Methodology}
+
+Throughout the analysis that will be conducted several methods and techniques will be used. These are described in this section.
+
+\subsubsection{Optimization}
+\todo{Fill Section once work on optimization starts.}
+\subsubsection{Non-dimensioning}
+
+One of the fundamental principals used throughout this paper, and indeed, throughout engineering, is that of non-dimensioning. By operating using non-dimensional parameters such as the Reynolds number $Re = \frac{\rho u L}{v}$ or the Prandtl number $Pr = \frac{c_p \mu}{k}$ solving problems involving differential equations becomes simplified. Also, the analysis becomes much more general, and can be scaled.
+
+\subsubsection{Numerical methods}
+\label{sec:numerical_methods}
+\paragraph{Integrating ODEs}
+
+An central part of solving unsteady heat transfer problems involves integrating ODEs, as will be seen in Section \ref{sec:formulation}. One of the simplest methods available, both conceptually and in terms of ease of implementing in code, is forward Euler time integration. It can be informally described as follows: given a function that can be defined by: 
+\begin{equation}
+y'(t) = f(t,y(t)), \quad y(t_0) = y_0
+\end{equation}
+we can compute the approximate shape of the function given the initial point and finding the slope of the curve for small intervals. Indeed, from the initial point, we can find the tangent of the curve at that point, and take a small step along that tangent until arriving at the next point, where the procedure can be repeated. Denoting the step size $h$, we can express forward Euler time integration as:
+\begin{equation}
+y_{n+1} =  y_n + hf(t_n,y_n)
+\end{equation}
+
+\paragraph{Property models}
+\label{sec:property_models}
+As the gases that are being treated in this report are at very high pressures, ideal gas approximations are inaccurate, and thus real gas properties must be employed. To this end, property models must be used, which can determine any gas property from two other independent properties.
+
+The property model that will be employed throughout this analysis is REFPROP, a tool developed by the National Institute of Standards and Technology \cite{refprop}. It uses values of critical and triple points together with equations for the thermodynamic and transport properties to calculate the state points of fluids.
+
+
+
