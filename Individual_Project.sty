@@ -2,6 +2,7 @@
 \ProvidesPackage{Individual_Project}
 
 \RequirePackage[english]{babel}
+\RequirePackage{multicol}
 \RequirePackage{graphicx}
 \setkeys{Gin}{draft=false}
 \RequirePackage{subfigure}
@@ -32,6 +33,7 @@
 \RequirePackage{soul}
 \RequirePackage{xfrac}
 \RequirePackage{caption}
+\RequirePackage{gensymb}
 \RequirePackage{tikz}
 \RequirePackage{geometry}
  \geometry{
@@ -41,7 +43,7 @@
  top=20mm,
  bottom=20mm,
  headheight=15pt, % as per the warning by fancyhdr
- marginparsep=15pt,
+ marginparsep=25pt,
  marginparwidth=80pt,
  includehead,includefoot,
  heightrounded
@@ -62,6 +64,7 @@
 \RequirePackage{blindtext}
 \RequirePackage{todonotes}
 \reversemarginpar
+\RequirePackage[capitalise]{cleveref}
 \graphicspath{{./figs/}}
 
 \numberwithin{equation}{section}

@@ -46,6 +46,22 @@ A =  0.938 ,  \quad B = -2.71
 
 \subsection{Hysteresis}
 
+The initial work this project builds upon uses the flow at the nozzle to determine the heat transfer at the wall of the cylinder. This assumes that the hydrogen flows instantaneously from the nozzle to the wall, when in reality there of course is a time delay, measured to be approximately 2 seconds for short cylinders\todo{define short and long cylinders at some point}. This assumption is acceptable for stable inflows, but for more complex filling patterns and also for improved accuracy it becomes necessary to incorporate hysteresis. Indeed, the heat transfer coefficient at the wall in fact can be said to depend on the nozzle flow seconds prior, or more generally, on the history of the nozzle flow. This can be modeled as follows:
+
+\begin{equation}
+\frac{d}{dt}\Big(\text{Nu}\Big) = \frac{\text{Nu}_{ss}-\text{Nu}}{\tau}
+\end{equation}
+
+
 \subsection{Throttling}
 
+Throttling is introduced in order to more accurately represent real life conditions. When a maximum temperature is reached, the inflow of hydrogen must be stopped in order to protect the materials of the tank, as detailed in \cref{sec:materialConstraints}. A simple method of throttling, with the flow stopping at the designated maximum temperature, 85 \degree C, and the flow restarting at a chosen temperature, in this case  75 \degree C\todo{Play around with this perhaps?}.
+
+
 \subsection{Optimization}
+
+\todo{General stuff: \\
+- Check tense and person \\
+- Check for repetition \\
+- Check for excessive verboseness
+}

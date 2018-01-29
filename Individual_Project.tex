@@ -102,13 +102,27 @@ I confirm that:
 \addcontentsline{toc}{section}{Acronyms}%
 \printnoidxglossaries
 
+\clearpage
+
+\listoftodos
 
 
 \cleardoublepage
 
 \pagenumbering{arabic}
 
+
+
+\ifdraft{
+\input{tex/Body.tex}
+}
+{
+\begin{multicols}{2}
+\input{tex/Body.tex}
+\end{multicols}
+}
 %TC:endignore
+\begin{filecontents}{tex/Body.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Start Individual Project here. Nothing before counts %%%%%
@@ -142,12 +156,11 @@ I confirm that:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %%% End Individual Project here. Nothing afterwards counts%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\end{filecontents}
 
 %TC:ignore
 
 
-%Works Cited
 \clearpage
 
 
@@ -184,10 +197,6 @@ I confirm that:
 
 \printbibliography
 \addcontentsline{toc}{section}{References}
-
-\clearpage
-
-\listoftodos
 
 %TC:endignore
 \end{document}

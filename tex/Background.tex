@@ -8,18 +8,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Vehicles and objectives}
 
-We must firstly consider what real-world relevance of this project is. As explained in Section \ref{sec:introduction}, the hydrogen cylinders being considered are for road vehicles. 
+We must firstly consider what real-world relevance of this project is. As explained in Section \ref{sec:introduction}, the hydrogen cylinders being considered are for road vehicles.  Although still an emerging technology, the basic functioning of a hydrogen fueled cylinders is relatively well established. They store compressed hydrogen in fuel tanks at high pressures, 350 and 700 MPa are the two current standards \todo{Cite} for pressure. This hydrogen is then used in the fuel cell and converted into electricity,, which can be used directly by the electric motor or stored on onboard batteries. It therefore follows that the objectives of the hydrogen storage system are several:
 
+\begin{itemize}
+\item High fuel capacity
+\item Low overall weight
+\item Low fill times
+\end{itemize}
+These have certain implications. Firstly, it is clear that several tradeoffs and compromises must be made. Increasing fuel capacity can be done by either using larger tanks, which leads to higher weight, or using higher pressures, which inevitably leads to higher temperatures. These higher temperatures are problematic due to material constraints as explained below in \cref{sec:materialConstraints}. Indeed, they lead to longer filling times as heat is allowed to dissipate through the tank walls. This 
+
+\todo{Fill}
 \subsubsection{Material constraints}
-
-The main reason that a problem exists, and consequently this paper (and much other work) is being undertaken, is the material limitations that exist in hydrogen cylinders. Indeed, the cylinders that are used for high pressure scenarios such as the one we are presented with, are constructed with a composite material such as carbon fibre or glass/aramid fibre. In addition, they have a liner that is made out of metal, typically aluminum, in Type III cylinders, and out of a thermoplastic material for Type IV cylinders. Of concern is the composite material, as the polymer matrix cannot withstand high temperatures, and as such the material properties of the cylinder will begin to degrade. The specific temperature at which this occurs is usually around the glass transition temperature of the epoxy, where the thermosetting polymer changes from a hard "glassy" state to a more compliant "rubbery" state.
+\label{sec:materialConstraints}
+The main reason that a problem exists, and consequently this paper (and much other work) is being undertaken, is the material limitations that exist in hydrogen cylinders. Indeed, the cylinders that are used for high pressure scenarios such as the one we are presented with, are constructed with a composite material such as carbon fibre or glass/aramid fibre. In addition, they have a liner that is made out of metal, typically aluminum, in Type III cylinders, and out of a thermoplastic material for Type IV cylinders. Of concern is the composite material, as the polymer matrix cannot withstand high temperatures, and as such the material properties of the cylinder will begin to degrade. The specific temperature at which this occurs is usually around the glass transition temperature of the epoxy, where the thermosetting polymer changes from a hard "glassy" state to a more compliant "rubbery" state. \todo{cite: http://www.epotek.com/site/files/Techtips/pdfs/tip23.pdf} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Previous work}
-
-
 
 We must first establish a baseline of previous work that has been conducted in this field, and subsequently analyze the shortcomings that exist in order to direct the research.
 
@@ -29,7 +35,7 @@ Some of these models use more advanced property models, such as the model presen
 
 \subsubsection{Experimental work}
 \label{sec:experimental_work}
-Several papers describe experimental work that has been conducted regarding the fast-filling of hydrogen cylinders, in particular comparing the results to simulations. Dicken and M\'erida's work indicates that the temperature inside the cylinder is rather uniform \cite{Dicken2007}. This claim is not, however supported by the work of  Zheng et al \todo{Citation} nor that of Woodfield et al \cite{Woodfield2008}, wherein large discrepancies among gas temperatures in different regions of the cylinder are found.
+Several papers describe experimental work that has been conducted regarding the fast-filling of hydrogen cylinders, in particular comparing the results to simulations. Dicken and M\'erida's work indicates that the temperature inside the cylinder is rather uniform \cite{Dicken2007}. This claim is not, however supported by the work of Zheng et al \todo{Citation} nor that of Woodfield et al \cite{Woodfield2008}, wherein large discrepancies among gas temperatures in different regions of the cylinder are found.
 
 \subsubsection{Analysis}
 
@@ -51,24 +57,24 @@ Reduced dimension models assume a constant gas temperature, which, as outlined i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cylinder filling models}
 
-Several ways of modeling the cylinder can be considered when analysing their filling, with varying complexity and accuracy.
+Several ways of modelling the cylinder can be considered when analysing their filling, with varying complexity and accuracy.
 
 \subsubsection{Zonal}
 
-A zonal model, also referred to as a 0-dimensional model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations, 
+A zonal model, also referred to as a 0-dimensional model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations, \todo{Fill}
 
 \subsubsection{Multidimensional}
 
-More complex multidimensional models can be created, either 2D axisymmetric models or full 3D models. 2D models will not include the effects of gravity or buoyoncy, but 
+More complex multidimensional models can be created, either 2D axisymmetric models or full 3D models. 2D models will not include the effects of gravity or buoyancy, but  \todo{fill}
 
 \label{sec:multidimensional}
 
-%%%%%%%%
-%%%%%%%%
-%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Heat transfer models}
 
-In order to successfully analyze the behaviour of the system as a whole we must consider several local heat transfer methods that occur at different places inside of the cylinder.
+In order to successfully analyse the behaviour of the system as a whole we must consider several local heat transfer methods that occur at different places inside of the cylinder.
 
 
 
@@ -88,11 +94,11 @@ In order to successfully analyze the behaviour of the system as a whole we must 
  
 \subsubsection{Pipe flow}
 
-A second behaviour that we will consider is that of pipe flow. This behaviour has been the focus of much research, as it is arguably the most common mode of heat transfer that occurs in most fluid systems.
+A second behaviour that we will consider is that of pipe flow. This behaviour has been the focus of much research, as it is arguably the most common mode of heat transfer that occurs in fluid systems.
 
 \subsubsection{Turbulent Jets}
 
-Lastly, we must also consider turbulent jets, as there will be such a situation at the exit of the nozzle. 
+Lastly, we must also consider turbulent jets, as there will be such a situation at the exit of the nozzle. \cite{pope2000}
 
 % Pope 2000 Cambridge University Press
 
@@ -101,7 +107,7 @@ Lastly, we must also consider turbulent jets, as there will be such a situation 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Methodology}
 
-Throughout the analysis that will be conducted several methods and techniques will be used. These are described in this section.
+Several techniques and methods will be used throughout the analysis. These are described in this section.
 
 \subsubsection{Optimization}
 \todo{Fill Section once work on optimization starts.}
