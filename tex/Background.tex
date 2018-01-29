@@ -8,14 +8,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Vehicles and objectives}
 
-We must firstly consider what real-world relevance of this project is. As explained in Section \ref{sec:introduction}, the hydrogen cylinders being considered are for road vehicles.  Although still an emerging technology, the basic functioning of a hydrogen fueled cylinders is relatively well established. They store compressed hydrogen in fuel tanks at high pressures, 350 and 700 MPa are the two current standards \todo{Cite} for pressure. This hydrogen is then used in the fuel cell and converted into electricity,, which can be used directly by the electric motor or stored on onboard batteries. It therefore follows that the objectives of the hydrogen storage system are several:
+We must firstly consider what real-world relevance of this project is. As explained in Section \ref{sec:introduction}, the hydrogen cylinders being considered are for road vehicles.  Although still an emerging technology, the basic functioning of a hydrogen fueled cylinders is relatively well established. They store compressed hydrogen in fuel tanks at high pressures, 35 and 70 MPa are the two current standards \todo{Cite} for pressure. This hydrogen is then used in the fuel cell and converted into electricity,, which can be used directly by the electric motor or stored on onboard batteries. It therefore follows that the objectives of the hydrogen storage system are several:
 
 \begin{itemize}
 \item High fuel capacity
 \item Low overall weight
 \item Low fill times
 \end{itemize}
-These have certain implications. Firstly, it is clear that several tradeoffs and compromises must be made. Increasing fuel capacity can be done by either using larger tanks, which leads to higher weight, or using higher pressures, which inevitably leads to higher temperatures. These higher temperatures are problematic due to material constraints as explained below in \cref{sec:materialConstraints}. Indeed, they lead to longer filling times as heat is allowed to dissipate through the tank walls. This 
+These have certain implications. Firstly, it is clear that several tradeoffs and compromises must be made. Increasing fuel capacity can be done by either using larger tanks, which leads to higher weight, or using higher pressures, which inevitably leads to higher temperatures. These higher temperatures are problematic due to material constraints as explained below in \cref{sec:materialConstraints}. Indeed, they lead to longer filling times as heat is allowed to dissipate through the tank walls. This leads to the desire to optimize filling patterns and develop other solutions to minimize temperature rise when filling to high pressures.
 
 \todo{Fill}
 \subsubsection{Material constraints}
@@ -61,13 +61,13 @@ Several ways of modelling the cylinder can be considered when analysing their fi
 
 \subsubsection{Zonal}
 
-A zonal model, also referred to as a 0-dimensional model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations, \todo{Fill}
+A zonal model, also referred to as a 0-dimensional model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations and much lower computational time.   \todo{Fill}
 
 \subsubsection{Multidimensional}
-
-More complex multidimensional models can be created, either 2D axisymmetric models or full 3D models. 2D models will not include the effects of gravity or buoyancy, but  \todo{fill}
-
 \label{sec:multidimensional}
+
+More complex multidimensional models can be created, either 2D axisymmetric models or full 3D models. 2D models will not include the effects of gravity or buoyancy, but these can be considered negligible, and the computational expense of full 3D simulations is rarely justifiable as the gains in accuracy are very small. \todo{fill}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -100,7 +100,6 @@ A second behaviour that we will consider is that of pipe flow. This behaviour ha
 
 Lastly, we must also consider turbulent jets, as there will be such a situation at the exit of the nozzle. \cite{pope2000}
 
-% Pope 2000 Cambridge University Press
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
