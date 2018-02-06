@@ -5,32 +5,39 @@
 % Governing equation for mass and internal energy
 %dm/dt du/dt
 
+\subsection{Governing equation}
 
+The governing equation for mass and internal energy of the gas in the tank is given by:
 
-%%%%%%%%
-%%%%%%%%
-%%%%%%%%
-
-\subsection{Heat transfer across cylinder}
-
-The main mode of heat transfer that occurs in the cylinder and that will be used throughout this report is heat conduction through the wall of the cylinder. This is modeled using:
 \begin{equation}
-\frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T }{\partial x^2}
+\frac{dU_{gas}}{dt} = \frac{d\left(m_{gas}u_{gas}\right)}{dt} = H_{in}\dot m_{in} - \dot Q_{out}
 \end{equation}
-where $a$ is the thermal diffusivity, which is defined by :
-\begin{equation}
-\alpha = \frac{k}{\rho c}
-\end{equation}
-where $k$ is the material's thermal conductivity, $\rho$ is the density of the material, and $c$ is the specific heat capacity of the material. This differential equation will be solved using forward Euler time integration as described in Section \ref{sec:numerical_methods}.
+The change in internal energy of the gas is equal to the difference in energy entering the system in the enthalpy of gas inflow and the energy leaving the system through the walls of the cylinder. The enthalpy of the inlet can be determined from real gas models as a function of the inlet pressure and temperature. Therefore the mass flow and the heat transferred to the cylinder must be calculated. 
 
-\subsection{Gas flow into cylinder}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Gas mass flow into cylinder}
 
 The nozzle and corresponding gas flow will be modeled using isentropic relations, and then a discharge coefficient relationship will be used to find the approximate real values. Indeed, the isentropic Reynold's number is first calculated as follows:
 
 \begin{equation}
 \text{Re}_{\text{ideal}} = \frac{\rho_{\text{exit}}\;d_{\text{inlet}}\;u_{\text{exit}}}{\mu_{\text{exit}}}
 \end{equation}
-where $\rho_{\text{exit}}$, $d_{\text{inlet}}$, $u_{\text{exit}}$, and $\mu_{\text{exit}}$ are determined using real gas models as described in Section \ref{sec:property_models}. In order to find the real mass flow an empirical discharge coefficient is employed:
+where $d_{\text{inlet}}$ is the diameter of the inlet delivery pip and  $\rho_{\text{exit}}$, $u_{\text{exit}}$, and $\mu_{\text{exit}}$ are determined using real gas models as described in Section \ref{sec:property_models}. More specifically:
+
+\begin{equation}
+\rho_{exit} =  f\left(P_{exit}, S_{in}\right), \quad u_{exit} = \sqrt{2\left(H_{in} - H_{static}\right)}, \quad\mu_{exit}= f\left(P_{exit}, S_{in}\right)
+\end{equation}
+where $P_{exit}$ is the pressure at the end of the inlet tube, $S_{in}$ is the entropy at the inlet, $H_{in}$ the stagnation enthalpy at the inlet, $H_{static}$ the static enthalpy at the end of the inlet tube. As the system is treated as isentropic, the inlet entropy can be used to calculate exit properties. Further:
+
+\begin{equation}
+S_{in} = f\left( P_{in}, T_{in} \right), \quad H_{in} = f\left( P_{in}, T_{in} \right), \quad H_{static} = f\left( P_{exit}, S_{in} \right)
+\end{equation}
+Where $P_{in}$ and $T_{in}$ and the inlet pressure and temperature respectively. The exit pressure $P_{exit}$ is the pressure inside the gas tank. However, in the case that the inlet diameter is choked, these calculations would yield velocities higher than the speed of sound, which is impossible. for this reason, if a velocity of Mach 1 or higher is achieved at any given time, an iterative process is used to find the value of $P_{exit}$ that will yield a velocity qual to the speed of sound, and the rest of properties and ultimately the Reynolds number calculated accordingly.
+
+In order to find the real mass flow an empirical discharge coefficient is employed:
 
 \begin{equation}
 \text{CD} = \frac{\dot{m}_{\text{in}}}{\dot{m}_{\text{ideal}}} = A + B \:\text{Re}_{\text{ideal}} 
@@ -40,21 +47,114 @@ A discharge coefficient must be used to account for the formation of a boundary 
 \begin{equation}
 A =  0.938 ,  \quad B = -2.71
 \end{equation}
+From the real mass flow the actual Reynold's number of the inflow can be calculated and used to find forced convection heat transfer coefficients in \cref{sec:forcedConvection,equ:nusseltReynolds} as follows:
+
+\begin{equation}
+\text{Re} = \frac{4\dot m_{in}}{\pi \mu d}
+\end{equation}
 
 
-\subsection{Hysteresis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Heat transfer from gas to cylinder}
+
+The heat transferred from the gas to the wall of the tank is given by a simple convection relationship:
+
+\begin{equation}
+\label{equ:convection}
+\dot Q = h A \left( T_{gas} - T_{wall}\right)
+\end{equation}
+where $A$ is the internal surface area of the cylinder, and $h$ is the heat transfer coefficient. The heat transfer coefficient is a result of the combination of both forced and natural convection. This is expressed as follows, as per \cite{ranong2011}:
+
+\begin{equation}
+h = \sqrt[4]{h_f^4 + h_n^4} 
+\end{equation}
+where $h_f$ is the heat transfer coefficient due to forced convection and $h_n$ is the heat transfer coefficient due to natural convection. Each coefficient can be non-dimensionalised using Nusselt's number, expressed as:
+\begin{equation}
+\text{Nu}_f = \frac{h_f D}{k}, \quad \text{Nu}_n = \frac{h_n D}{k}
+\end{equation}
+where $D$ is the characteristic length, in this case the diameter of the cylinder, and $k$, the thermal conductivity of the fluid. The values of the Nusselt's numbers can be determined from empirical correlations, as detailed in \cref{sec:forcedConvection,sec:naturalConvection}.
+
+\subsubsection{Forced convection}
+\label{sec:forcedConvection}
+As the magnitude of heat transfer is related to the flow in forced convection, the Nusselt's number can be said to be a function of the Reynolds number, taking the form:
+
+\begin{equation}
+\label{equ:nusseltReynolds}
+\text{Nu}_f = C \text{Re} ^D
+\end{equation}
+
+
+\begin{equation}
+C =   ,  \quad D = 
+\end{equation}
+
+
+\paragraph{Hysteresis}
 
 The initial work this project builds upon uses the flow at the nozzle to determine the heat transfer at the wall of the cylinder. This assumes that the hydrogen flows instantaneously from the nozzle to the wall, when in reality there of course is a time delay, measured to be approximately 2 seconds for short cylinders\todo{define short and long cylinders at some point}. This assumption is acceptable for stable inflows, but for more complex filling patterns and also for improved accuracy it becomes necessary to incorporate hysteresis. Indeed, the heat transfer coefficient at the wall in fact can be said to depend on the nozzle flow seconds prior, or more generally, on the history of the nozzle flow. This can be modeled as follows:
 
 \begin{equation}
-\frac{d}{dt}\Big(\text{Nu}\Big) = \frac{\text{Nu}_{ss}-\text{Nu}}{\tau}
+\frac{d}{dt}\Big(\text{Nu}_f \Big) = \frac{\text{Nu}_{f,ss}-\text{Nu}_f}{\tau}
+\end{equation}
+where $\text{Nu}_f$ is the forced convection Nusselt's number of the flow, $\text{Nu}_{f,ss}$ is the steady state forced convection Nusselt's number, and $\tau$ is the time scale. The time constant reflects the amount of time it takes for the flow to recirculate, which is approximately 2 seconds, as per \todo{fill}.
+
+\subsubsection{Natural convection}
+\label{sec:naturalConvection}
+
+Natural convection is caused by buoyancy driven flow, so the Nusselt's number can be found to be related to the Rayleigh's number (itself a product of Grashof's and Prandt's numbers ) by the following relationship:
+
+\begin{equation}
+\text{Nu}_n  = E \text{Ra}^F
+\end{equation}
+where Rayleigh's number is defined as:
+\begin{equation}
+\text{Ra} = \left| \frac{g\beta\left(T_{wall} - T_{gas} \right) D^3}{v\alpha}\right|
+\end{equation}
+where $g$ is the acceleration due to gravity, $\beta$ is the coefficient of thermal expansion, $D$ is the characteristic length, in this case the cylinder diameter, $v$ is the kinematic viscosity, and $\alpha$ is the thermal diffusivity, as defined by:
+\begin{equation}
+\label{equ:thermalDiffusivity}
+\alpha = \frac{k}{\rho c}
+\end{equation}
+where $k$ is the material's thermal conductivity, $\rho$ is the density of the material, and $c$ is the specific heat capacity of the material. The coefficients are given by \todo{cite}:
+
+\begin{equation}
+E =   ,  \quad F = 
 \end{equation}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Heat transfer across cylinder}
+
+The main mode of heat transfer that occurs in the cylinder and that will be used throughout this report is heat conduction through the wall of the cylinder. This is modeled using:
+\begin{equation}
+\frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T }{\partial x^2}
+\end{equation}
+where $a$ is the thermal diffusivity, as defined in \cref{equ:thermalDiffusivity} :
+This differential equation will be solved using forward Euler time integration as described in Section \ref{sec:numerical_methods}. Solving this equation will yield the temperature distribution throughout the thickness of the cylinder wall, and more specifically, the internal wall temperature that is used to calculate the heat transferred out of the gas in \cref{equ:convection}.
+
+\subsubsection{Discretization}
+
+
+\subsubsection{Outer Wall}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Throttling}
 
-Throttling is introduced in order to more accurately represent real life conditions. When a maximum temperature is reached, the inflow of hydrogen must be stopped in order to protect the materials of the tank, as detailed in \cref{sec:materialConstraints}. A simple method of throttling, with the flow stopping at the designated maximum temperature, 85 \degree C, and the flow restarting at a chosen temperature, in this case  75 \degree C\todo{Play around with this perhaps?}.
+Throttling is introduced in order to more accurately represent real life conditions. When a maximum temperature is reached, the inflow of hydrogen must be stopped in order to protect the materials of the tank, as detailed in \cref{sec:materialConstraints}. A simple method of throttling, with the flow stopping at the designated maximum temperature, 85 \degree C, and the flow restarting at a chosen temperature. The optimum temperature at which flow restarts was considered in this study, and results are present in \cref{sec:throttlingResults}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Optimization}
 
