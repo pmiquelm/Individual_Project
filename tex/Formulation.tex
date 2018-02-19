@@ -96,7 +96,7 @@ As the magnitude of heat transfer is related to the flow in forced convection, t
 \text{Nu}_{f,ss} = c_4 \text{Re} ^{c_5}
 \end{equation}
 
-\noindent where ${Nu}_{f,ss}$ is the steady state Nusselt's number and the empirical constants $E$ and $F$ are given by \todo{cite} as:
+\noindent where ${Nu}_{f,ss}$ is the steady state Nusselt's number and the empirical constants $c_4$ and $c_5$ are given by \todo{cite} as:
 
 \begin{equation}
 \label{equ:nusseltReynoldsConsts}
@@ -141,7 +141,7 @@ where $\tau$ is the time scale, which reflects the amount of time it takes for t
 \tau_{diss} = c_7 \frac{L}{u_{recirc}}
 \end{equation}
 
-\noindent Let us assume that instantaneous Nusselt's number depends on $u_{recirc}$ as it depends on $\text{Re}^{c_5}$ and $F\sim\mathcal{O}(1)$. From \cref{equ:nusseltReynolds} we know that: 
+\noindent Let us assume that instantaneous Nusselt's number depends on $u_{recirc}$ as it depends on $\text{Re}^{c_5}$ and $c_5\sim\mathcal{O}(1)$. From \cref{equ:nusseltReynolds} we know that: 
 
 \begin{equation}
 \frac{D u_{recirc}}{\nu} = c_8 \text{Nu}_f
@@ -169,16 +169,16 @@ where $\tau$ is the time scale, which reflects the amount of time it takes for t
 c_9 = c_6 \frac{\nu\text{Nu}_f}{u_{exit}d} = c_4 c_6
 \end{equation}
 
-\noindent Which leads to a final definition of $\tau_{diss}$:
+\noindent Which leads to a final definition of $\tau_{diss} in terms of literature constants:$:
 
 \begin{equation}
-\tau_{diss} = c_4 c_6 \frac{L^2}{\nu \text{Nu}_f}
+\tau_{diss} = \frac{c_4}{2c_1}  \frac{L^2}{\nu \text{Nu}_f}
 \end{equation}
 
 \noindent Therefore, in a pure dissipation scenario, where $\text{Nu}_{f,ss} \rightarrow 0$, we have:
 
 \begin{equation}
-\frac{d}{dt}\Big(\text{Nu}_f \Big) = -\text{Nu}_f^2 \frac{\nu}{c_4 c_6LD}
+\frac{d}{dt}\Big(\text{Nu}_f \Big) = -\text{Nu}_f^2  \frac{2c_1}{c_4}\frac{\nu}{LD}
 \end{equation}
 
 \noindent Thus, when the inflow stops the heat transfer at the wall will decrease quadratically.
