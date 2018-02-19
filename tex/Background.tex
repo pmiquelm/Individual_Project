@@ -6,19 +6,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Vehicles and objectives}
+\subsection{Objective}x
 
-We must firstly consider what real-world relevance of this project is. As explained in Section \ref{sec:introduction}, the hydrogen cylinders being considered are for road vehicles.  Although still an emerging technology, the basic functioning of a hydrogen fueled cylinders is relatively well established. They store compressed hydrogen in fuel tanks at high pressures, 35 and 70 MPa are the two current standards \todo{Cite} for pressure. This hydrogen is then used in the fuel cell and converted into electricity,, which can be used directly by the electric motor or stored on onboard batteries. It therefore follows that the objectives of the hydrogen storage system are several:
+We must firstly consider what real-world relevance of this project is. As explained in Section \ref{sec:introduction}, the hydrogen cylinders being considered are for road vehicles.  Although still an emerging technology, the basic functioning of a hydrogen fueled vehicle is relatively well established. They store compressed hydrogen in fuel tanks at high pressures, 35 and 70 MPa being the two current standards. This hydrogen is then used in the fuel cell and converted into electricity, which can be used directly by the electric motor or stored on onboard batteries. It therefore follows that the objectives of the hydrogen storage system are several:
 
 \begin{itemize}
 \item High fuel capacity
 \item Low overall weight
 \item Low fill times
 \end{itemize}
-These have certain implications. Firstly, it is clear that several tradeoffs and compromises must be made. Increasing fuel capacity can be done by either using larger tanks, which leads to higher weight, or using higher pressures, which inevitably leads to higher temperatures. These higher temperatures are problematic due to material constraints as explained below in \cref{sec:materialConstraints}. Indeed, they lead to longer filling times as heat is allowed to dissipate through the tank walls. This leads to the desire to optimize filling patterns and develop other solutions to minimize temperature rise when filling to high pressures.
+These goals have certain implications. Firstly, it is clear that several tradeoffs and compromises must be made. Increasing fuel capacity can be done by either using larger tanks, which leads to higher weight, or using higher pressures, which inevitably leads to higher temperatures. These higher temperatures are problematic due to material constraints as explained below in \cref{sec:materialConstraints}. Indeed, they lead to longer filling times as heat has to be allowed to dissipate through the tank walls. Thus, other solutions must be developed to minimize the temperature rise when filling to high pressures.
 
-\todo{Fill}
-\subsubsection{Material constraints}
+\subsubsection{Material constraints} \todo{reword shitty paragraph}
 \label{sec:materialConstraints}
 The main reason that a problem exists, and consequently this paper (and much other work) is being undertaken, is the material limitations that exist in hydrogen cylinders. Indeed, the cylinders that are used for high pressure scenarios such as the one we are presented with, are constructed with a composite material such as carbon fibre or glass/aramid fibre. In addition, they have a liner that is made out of metal, typically aluminum, in Type III cylinders, and out of a thermoplastic material for Type IV cylinders. Of concern is the composite material, as the polymer matrix cannot withstand high temperatures, and as such the material properties of the cylinder will begin to degrade. The specific temperature at which this occurs is usually around the glass transition temperature of the epoxy, where the thermosetting polymer changes from a hard "glassy" state to a more compliant "rubbery" state. \todo{cite: http://www.epotek.com/site/files/Techtips/pdfs/tip23.pdf} 
 
@@ -29,15 +28,39 @@ The main reason that a problem exists, and consequently this paper (and much oth
 
 We must first establish a baseline of previous work that has been conducted in this field, and subsequently analyze the shortcomings that exist in order to direct the research.
 
-\subsubsection{Modeling Work}
-A large amount of research has been conducted using multidimensional analysis, especially using \gls{cfd}. Indeed, there is myriad papers describing different methods and setups, such as Dicken and M\'erida's work, which uses the standard  k-$\epsilon$ turbulence model  and the Redlich-Kwong real gas equation of state for real gas properties \cite{Dicken2007a}. 
-Some of these models use more advanced property models, such as the model presented by Zhao et al., which employs REFPROP (see Section \ref{sec:property_models}) in order to have more precise real gas properties \cite{Zhao2012}.
-
-Less work has been conducted regarding reduced order simulations, which employ assumptions such as axisymmetry or uniform gas temperature. 
 
 \subsubsection{Experimental work}
 \label{sec:experimental_work}
-Several papers describe experimental work that has been conducted regarding the fast-filling of hydrogen cylinders, in particular comparing the results to simulations. Dicken and M\'erida's work indicates that the temperature inside the cylinder is rather uniform \cite{Dicken2007}. This claim is not, however supported by the work of Zheng et al \todo{Citation} nor that of Woodfield et al \cite{Woodfield2008}, wherein large discrepancies among gas temperatures in different regions of the cylinder are found.
+Several papers describe experimental work that has been conducted regarding the fast-filling of hydrogen cylinders, in particular comparing the results to simulations. Dicken and M\'erida's work indicates that the temperature inside the cylinder is rather uniform \cite{Dicken2007}. This claim is not, however supported by the work of Zheng et al \cite{Zheng2013} nor that of Woodfield et al \cite{Woodfield2008}, wherein large discrepancies among gas temperatures in different regions of the cylinder are found.
+
+
+\subsubsection{Modeling Work}
+\label{sec:modelingWork}
+
+\paragraph{\gls{cfd}}
+A large amount of research has been conducted using multidimensional analysis, especially using \gls{cfd}. Indeed, there are many papers describing different methods and setups, such as Dicken and M\'erida's work, which uses the standard  k-$\epsilon$ turbulence model and the Redlich-Kwong real gas equation of state for real gas properties \cite{Dicken2007a}. 
+Other investigations use more advanced property models, such as the one presented by Zhao et al., which employs REFPROP (see Section \ref{sec:property_models}) in order to have more precise real gas properties \cite{Zhao2012}.
+
+\paragraph{Reduced order simulations}
+Less work has been conducted regarding reduced order simulations, which employ assumptions such as axisymmetry or uniform gas temperature. 
+
+The work by Woodfield et al \cite{Woodfield2008} presents a reduced order model employing a mass flow and internal energy balance for the compressed gas and one-dimensional unsteady heat conduction equation for the wall solved simultaneously. It uses the Lee-Kesler method \cite{Lee1975} to find the compressibility and thus the density and from that the mass flow. The heat transfer coefficient between the gas and the wall is assumed to be constant: 500 W/(m$^2$K) during filling and 250 W/(m$^2$K) after full. 
+
+Similarly, the work by Monde et al \cite{Monde2007} uses the same assumption regarding heat transfer coefficient values.  They achieve a reasonable fit with experimental data, shown in \cref{fig:mondeFit}, even though the measured heat transfer coefficients were significantly lower, shown in \cref{tab:mondeHValues}.
+
+\begin{figure}[htbp]
+\begin{center}
+\caption{Comparison between estimated and measured temperatures by Monde et al \cite{Monde2007}}
+\label{fig:mondeFit}
+\end{center}
+\end{figure}
+
+\begin{table}[h]
+\centering  \begin{tabular}{@{} cccc @{}}    \toprule    ? & ? & ? & ? \\     \midrule    ? & ? & ? & ? \\     ? & ? & ? & ? \\     ? & ? & ? & ? \\     ? & ? & ? & ? \\     ? & ? & ? & ? \\     \bottomrule
+  \end{tabular}
+\caption{Heat transfer coefficents at various conditions by Monde et al \cite{Monde2007}}
+\label{tab:mondeHValues}\end{table}
+
 
 \subsubsection{Analysis}
 
@@ -49,9 +72,15 @@ Several papers describe experimental work that has been conducted regarding the 
 % Therefore it's just constrained by geometric properties
 % CFD deals better with hysteresis and geometry
 
-The simulation work that has been conducted can be, in broad terms, divided into complex CFD models and more simplified 0-dimensional models. It is important analyze the difference between these two systems. The main advantage of reduced dimension models is that they are much less computationally expensive. This, in turn, means it can be incorporated as part of a larger analysis, in which it must be run multiple times, such as optimization routines or probabilistic whole station models.
+The simulation work that has been conducted can be, in broad terms, divided into complex \gls{cfd} models and more simplified reduced dimensional models. It is important analyze the difference between these two systems. 
 
-Reduced dimension models assume a constant gas temperature, which, as outlined in Section \ref{sec:experimental_work}, is supported by some experimental work, but refuted by others. For this reason, more research should be conducted to validate the uniform gas temperature approximation.
+\Gls{cfd} models have several advantages, as they take into consideration many things which reduced order models must simplify or assume Firstly, one can represent the geometry of the cylinder more accurately using \gls{cfd}. Secondly, time effects can be directly simulated without the need of timescales to be derived. However, they are extremely computationally expensive, with run times lasting from hours to weeks. It thus follows that the main advantage of reduced dimension models is that they are much less computationally expensive. This, in turn, means they can be incorporated as a part of larger analyses, in which they must be run multiple times, such as optimization routines or probabilistic whole station models.
+
+Reduced dimension models up to date make assumptions that are difficult to support with evidence, and therefore lead to results not being very accurate. This leads to adjustments being made to the model to match the experimental data from the same experiment, which produces a better fit for the model, but leads to a less predictive model. For this reason, it is important to improve reduced order models by devising ways to calculate quantities previously assumed. This will improve the models' predictive ability, which will increase confidence in results from simulations regarding events which haven't been tried experimentally.
+
+For instance, they assume a constant gas temperature, which, as outlined in Section \ref{sec:experimental_work}, is supported by some experimental work, but refuted by others. For this reason, more research should be conducted to validate the uniform gas temperature approximation. Another assumption typically made is a constant heat transfer coefficient derived from time-averaged experimental results, as explained in \cref{sec:modelingWork}. This report will propose a new method of deriving the heat transfer coefficient numerically to achieve better results.
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,7 +92,7 @@ Several ways of modelling the cylinder can be considered when analysing their fi
 
 \subsubsection{Zonal}
 
-A zonal model, also referred to as a 0-dimensional model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations and much lower computational time.   \todo{Fill}
+A zonal model, also referred to as a 0-dimensional or reduced order model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations and much lower computational time.   \todo{Fill}
 
 \subsubsection{Multidimensional}
 \label{sec:multidimensional}
@@ -99,9 +128,33 @@ In order to successfully analyse the behaviour of the system as a whole we must 
 A second behaviour that we will consider is that of pipe flow. This behaviour has been the focus of much research, as it is arguably the most common mode of heat transfer that occurs in fluid systems.
 
 \subsubsection{Turbulent Jets}
+\label{sec:turbulentJets}
+We must also consider turbulent jets, as the main driver of flow in the cylinder, which in turn drives convective heat transfer, is the turbulent jet that develops from the end of the nozzle throughout the length of the cylinder. Experimental results can be used to derive expressions for the axial velocity of the jet. Radial profiles of  mean axial velocity can be seen in \cref{fig:radialProfile}.
 
-Lastly, we must also consider turbulent jets, as there will be such a situation at the exit of the nozzle. \cite{pope2000}
+\begin{figure}[h]
+\begin{centering}
+\caption{Radial profiles of mean axial velocity in a turbulent round jet with Re = 95,000. Adapted from \cite{pope2000} with the data from \cite{hussein1994}}
+\label{fig:radialProfile}
+\end{centering}
+\end{figure}
 
+
+\noindent By plotting the inverse of the non-dimensional speed, $u_{exit}/u$ against $x/d$ we get the clearly linear relationship shown in \cref{fig:jetSpeed}.
+
+\begin{figure}[h]
+\begin{centering}
+\caption{Jet speed vs distance. Adapted from \cite{pope2000} with the data from \cite{hussein1994}}
+\label{fig:jetSpeed}
+\end{centering}
+\end{figure}
+
+\noindent From this experimental result the following relationship is obtained: 
+\begin{equation}
+\label{equ:axialSpeed}
+\frac{u(x)}{u_{exit}} = \frac{B}{\left(x-x_0\right)/d_{inlet}}
+\end{equation}
+
+\noindent where $u(x)$ is the axial velocity at a distance $x$ from the nozzle, $x_0$ is the position of the virtual origin, and $B$ is an empirical constant.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -114,17 +167,17 @@ Several techniques and methods will be used throughout the analysis. These are d
 \todo{Fill Section once work on optimization starts.}
 \subsubsection{Non-dimensioning}
 
-One of the fundamental principals used throughout this paper, and indeed, throughout engineering, is that of non-dimensioning. By operating using non-dimensional parameters such as the Reynolds number $Re = \frac{\rho u L}{v}$ or the Prandtl number $Pr = \frac{c_p \mu}{k}$ solving problems involving differential equations becomes simplified. Also, the analysis becomes much more general, and can be scaled.
+One of the fundamental principles used throughout this paper, and indeed, throughout engineering, is that of non-dimensioning. By operating using non-dimensional parameters such as the Reynolds number $\text{Re} = \frac{\rho u L}{v}$ or the Prandtl number $\text{Pr} = \frac{c_p \mu}{k}$ solving problems involving differential equations becomes simplified. Also, the analysis becomes much more general, and can be scaled.
 
 \subsubsection{Numerical methods}
 \label{sec:numerical_methods}
-\paragraph{Integrating ODEs}
+\paragraph{Integrating \glspl{ode}}
 
-An central part of solving unsteady heat transfer problems involves integrating ODEs, as will be seen in Section \ref{sec:formulation}. One of the simplest methods available, both conceptually and in terms of ease of implementing in code, is forward Euler time integration. It can be informally described as follows: given a function that can be defined by: 
+A central part of solving unsteady heat transfer problems involves integrating \glspl{ode}, as will be seen in Section \ref{sec:formulation}. One of the simplest methods available, both conceptually and in terms of ease of implementing in code, is forward Euler time integration. It can be described as follows: given a function that can be defined by: 
 \begin{equation}
 y'(t) = f(t,y(t)), \quad y(t_0) = y_0
 \end{equation}
-we can compute the approximate shape of the function given the initial point and finding the slope of the curve for small intervals. Indeed, from the initial point, we can find the tangent of the curve at that point, and take a small step along that tangent until arriving at the next point, where the procedure can be repeated. Denoting the step size $h$, we can express forward Euler time integration as:
+we can compute the approximate shape of the function given the initial point and finding the slope of the curve for small intervals. Indeed, from the initial point, we can find the tangent of the curve at that point, and take a small step along that tangent until arriving at the next point, where the procedure can be repeated. Denoting the step size as $h$, we can express forward Euler time integration as:
 \begin{equation}
 y_{n+1} =  y_n + hf(t_n,y_n)
 \end{equation}
