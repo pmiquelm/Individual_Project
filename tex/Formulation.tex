@@ -47,12 +47,12 @@ S_{in} = f\left( P_{in}, T_{in} \right), \quad H_{in} = f\left( P_{in}, T_{in} \
 In order to find the real mass flow an empirical discharge coefficient is employed.
 
 \begin{equation}
-C_D = \frac{\dot{m}_{in}}{\dot{m}_{ideal}} = A + C \:\text{Re}_{ideal} 
+C_D = \frac{\dot{m}_{in}}{\dot{m}_{ideal}} = c_2+ c_3 \:\text{Re}_{ideal} 
 \end{equation}
 A discharge coefficient must be used to account for the formation of a boundary layer inside the inlet tube. The empirical model that was used was obtained from \todo{Citation}, and uses the following values:
 
 \begin{equation}
-A =  0.938 ,  \quad C = -2.71
+c_2 =  0.938 ,  \quad c_3 = -2.71
 \end{equation}
 From the real mass flow the actual Reynold's number of the inflow can be calculated and used to find forced convection heat transfer coefficients in \cref{sec:forcedConvection,equ:nusseltReynolds} as follows: \todo{avoid forward references}
 
@@ -93,14 +93,14 @@ As the magnitude of heat transfer is related to the flow in forced convection, t
 
 \begin{equation}
 \label{equ:nusseltReynolds}
-\text{Nu}_{f,ss} = E \text{Re} ^F
+\text{Nu}_{f,ss} = c_4 \text{Re} ^{c_5}
 \end{equation}
 
 \noindent where ${Nu}_{f,ss}$ is the steady state Nusselt's number and the empirical constants $E$ and $F$ are given by \todo{cite} as:
 
 \begin{equation}
 \label{equ:nusseltReynoldsConsts}
-E =   ,  \quad F = 
+c_4 =   ,  \quad c_5 = 
 \end{equation}
 
 The initial work this project builds upon uses the flow at the nozzle to determine the heat transfer at the wall of the cylinder. This assumes that the hydrogen flows instantaneously from the nozzle to the wall, when in reality there is of course a time delay. This assumption is acceptable for stable inflows, hence us referring to the steady state Nusselt's number ${Nu}_{f,ss}$,  but for more complex filling patterns and also for improved accuracy it becomes necessary to incorporate hysteresis. Indeed, the heat transfer coefficient at the wall in fact can be said to depend on the nozzle flow seconds prior, or more generally, on the history of the nozzle flow. This can be modeled as follows: \todo{Does this need to be cited / proved?}
@@ -108,7 +108,7 @@ The initial work this project builds upon uses the flow at the nozzle to determi
 \begin{equation}
 \frac{d}{dt}\Big(\text{Nu}_f \Big) = \frac{\text{Nu}_{f,ss}-\text{Nu}_f}{\tau}
 \end{equation}
-where $\text{Nu}_f$ is the forced convection Nusselt's number of the flow, $\text{Nu}_{f,ss}$ is the steady state forced convection Nusselt's number, and $\tau$ is the time scale. The time constant reflects the amount of time it takes for the flow to recirculate. Two time scales are considered, as two different situations may be present. The flow in the cylinder may be driven by the inflow of mass from the nozzle, in which case we have a time scale of production $\tau_{prod}$. However, if the inflow halts, the flow field in the cylinder will be driven by the dissipation of the existing flow and thus the time scale is denoted $\tau_{diss}$. Therefore the overall time scale is given by the minimum of these two: \todo{explain why it's minimum}
+where $\tau$ is the time scale, which reflects the amount of time it takes for the flow to recirculate. Two time scales are considered, as two different situations may be present. The flow in the cylinder may be driven by the inflow of mass from the nozzle, in which case we have a time scale of production $\tau_{prod}$. However, if the inflow halts, the flow field in the cylinder will be driven by the dissipation of the existing flow and thus the time scale is denoted $\tau_{diss}$. Therefore the overall time scale is given by the minimum of these two: \todo{explain why it's minimum}
 
 \begin{equation}
 \tau = \text{min}\left(\tau_{prod},\tau_{diss}\right)
@@ -118,67 +118,67 @@ where $\text{Nu}_f$ is the forced convection Nusselt's number of the flow, $\tex
 
 \begin{equation}
 \begin{aligned}
-\tau_{prod} &= \int_{0}^{L} \frac{1}{u(x)} dx = \frac{1}{B u_{exit}} \int_0^L \left( x - x_0 \right) dx \\[2ex]
- &= \frac{\frac{L^2}{2} - x_0L}{Bdu_{exit}}
+\tau_{prod} &= \int_{0}^{L} \frac{1}{u(x)} dx = \frac{1}{c_1 u_{exit}} \int_0^L \left( x - x_0 \right) dx \\[2ex]
+ &= \frac{\frac{L^2}{2} - x_0L}{c_1du_{exit}}
 \end{aligned}
 \end{equation}
 
 \noindent As we have $x_0\ll L$ we can write:
 
 \begin{equation}
-\tau_{prod} = \frac{L^2}{2Bdu_{exit}}
+\tau_{prod} = \frac{L^2}{2c_1du_{exit}}
 \end{equation}
 
-\noindent we can rewrite the constant:
+\noindent and defining $c_6 = \frac{1}{2c_1}$:
 
 \begin{equation}
-\tau_{prod} = G \frac{L^2}{u_{exit} d}
+\tau_{prod} = c_6 \frac{L^2}{u_{exit} d}
 \end{equation}
 
 \noindent The dissipation time scale can be said to be proportional to the length of the cylinder $L$ and the recirculation velocity $u_{recirc}$: \todo{ need to explain why?}
 
 \begin{equation}
-\tau_{diss} = H \frac{L}{u_{recirc}}
+\tau_{diss} = c_7 \frac{L}{u_{recirc}}
 \end{equation}
 
-\noindent Let us assume that instantaneous Nusselt's number depends on $u_{recirc}$ as it depends on $\text{Re}^D$ and $D\sim\mathcal{O}(1)$. From \cref{equ:nusseltReynolds} we know that the 
+\noindent Let us assume that instantaneous Nusselt's number depends on $u_{recirc}$ as it depends on $\text{Re}^{c_5}$ and $F\sim\mathcal{O}(1)$. From \cref{equ:nusseltReynolds} we know that: 
 
 \begin{equation}
-\frac{D u_{recirc}}{\nu} = I \text{Nu}_f
+\frac{D u_{recirc}}{\nu} = c_8 \text{Nu}_f
 \end{equation}
 
 \noindent We can therefore rewrite:
 
 \begin{equation}
-\tau_{diss} = \frac{H}{I} \frac{LD}{\nu \text{Nu}_f}
+\tau_{diss} = \frac{c_7}{c_8} \frac{LD}{\nu \text{Nu}_f}
 \end{equation}
 
 \noindent Combining the two constants and absorbing the $L/D$ coefficient:
 \begin{equation}
-\tau_{diss} = J \frac{L^2}{\nu \text{Nu}_f}
+\tau_{diss} = c_9 \frac{L^2}{\nu \text{Nu}_f}
 \end{equation}
 
 \noindent We can then make use of the fact that in steady state we know $\tau_{prod} = \tau_{diss}$, which leads to:
 
 \begin{equation}
-\tau_{diss} = J \frac{L^2}{\nu \text{Nu}_f} = G \frac{L^2}{u_{exit} d}
+\tau_{diss} = c_9 \frac{L^2}{\nu \text{Nu}_f} = c_6 \frac{L^2}{u_{exit} d}
 \end{equation}
 
 \noindent  Substituting the definitions of Nusselt's and Reynolds numbers from \cref{equ:reynoldsIdeal,equ:nusseltReynolds}:
 \begin{equation}
-J = G \frac{\nu\text{Nu}_f}{u_{exit}d} = GE
+c_9 = c_6 \frac{\nu\text{Nu}_f}{u_{exit}d} = c_4 c_6
 \end{equation}
 
 \noindent Which leads to a final definition of $\tau_{diss}$:
 
 \begin{equation}
-\tau_{diss} = GE \frac{L^2}{\nu \text{Nu}_f}
+\tau_{diss} = c_4 c_6 \frac{L^2}{\nu \text{Nu}_f}
 \end{equation}
 
 \noindent Therefore, in a pure dissipation scenario, where $\text{Nu}_{f,ss} \rightarrow 0$, we have:
 
 \begin{equation}
-\frac{d}{dt}\Big(\text{Nu}_f \Big) = -\text{Nu}_f^2 \frac{\nu}{GELD}
+\frac{d}{dt}\Big(\text{Nu}_f \Big) = -\text{Nu}_f^2 \frac{\nu}{c_4 c_6LD}
 \end{equation}
 
 \noindent Thus, when the inflow stops the heat transfer at the wall will decrease quadratically.
@@ -189,7 +189,7 @@ J = G \frac{\nu\text{Nu}_f}{u_{exit}d} = GE
 Natural convection is caused by buoyancy driven flow, so the natural Nusselt's number can be found to be related to the Rayleigh's number (itself a product of Grashof's and Prandt's numbers) by the following relationship:
 
 \begin{equation}
-\text{Nu}_n  = K \text{Ra}^L
+\text{Nu}_n  = c_{10} \text{Ra}^{c_{11}}
 \end{equation}
 where Rayleigh's number is defined as:
 \begin{equation}
@@ -203,7 +203,7 @@ where $g$ is the acceleration due to gravity, $\beta$ is the coefficient of ther
 where $k$ is the material's thermal conductivity, $\rho$ is the density of the material, and $c$ is the specific heat capacity of the material. The coefficients are given by \todo{cite}:
 
 \begin{equation}
-K =   ,  \quad L = 
+c_{10} =   ,  \quad c_{11} = 
 \end{equation}
 
 

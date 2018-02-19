@@ -74,7 +74,7 @@ Similarly, the work by Monde et al \cite{Monde2007} uses the same assumption reg
 
 The simulation work that has been conducted can be, in broad terms, divided into complex \gls{cfd} models and more simplified reduced dimensional models. It is important analyze the difference between these two systems. 
 
-\Gls{cfd} models have several advantages, as they take into consideration many things which reduced order models must simplify or assume Firstly, one can represent the geometry of the cylinder more accurately using \gls{cfd}. Secondly, time effects can be directly simulated without the need of timescales to be derived. However, they are extremely computationally expensive, with run times lasting from hours to weeks. It thus follows that the main advantage of reduced dimension models is that they are much less computationally expensive. This, in turn, means they can be incorporated as a part of larger analyses, in which they must be run multiple times, such as optimization routines or probabilistic whole station models.
+\Gls{cfd} models have several advantages, as they take into consideration many things which reduced order models must simplify or assume. Firstly, one can represent the geometry of the cylinder more accurately using \gls{cfd}. Secondly, time effects can be directly simulated without the need of timescales to be derived. However, they are extremely computationally expensive, with run times lasting from hours to weeks. It thus follows that the main advantage of reduced dimension models is that they are much less computationally expensive. This, in turn, means they can be incorporated as a part of larger analyses, in which they must be run multiple times, such as optimization routines or probabilistic whole station models.
 
 Reduced dimension models up to date make assumptions that are difficult to support with evidence, and therefore lead to results not being very accurate. This leads to adjustments being made to the model to match the experimental data from the same experiment, which produces a better fit for the model, but leads to a less predictive model. For this reason, it is important to improve reduced order models by devising ways to calculate quantities previously assumed. This will improve the models' predictive ability, which will increase confidence in results from simulations regarding events which haven't been tried experimentally.
 
@@ -151,10 +151,10 @@ We must also consider turbulent jets, as the main driver of flow in the cylinder
 \noindent From this experimental result the following relationship is obtained: 
 \begin{equation}
 \label{equ:axialSpeed}
-\frac{u(x)}{u_{exit}} = \frac{B}{\left(x-x_0\right)/d_{inlet}}
+\frac{u(x)}{u_{exit}} = \frac{c_1}{\left(x-x_0\right)/d_{inlet}}
 \end{equation}
 
-\noindent where $u(x)$ is the axial velocity at a distance $x$ from the nozzle, $x_0$ is the position of the virtual origin, and $B$ is an empirical constant.
+\noindent where $u(x)$ is the axial velocity at a distance $x$ from the nozzle, $x_0$ is the position of the virtual origin, and $c_1$ is an empirical constant.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
