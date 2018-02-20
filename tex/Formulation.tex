@@ -7,10 +7,12 @@
 
 \subsection{Governing equation}
 
+%dm/dt = m in
+
 The governing equation for mass and internal energy of the gas in the tank is given by:
 
 \begin{equation}
-\frac{dU_{gas}}{dt} = \frac{d\left(m_{gas}u_{gas}\right)}{dt} = H_{in}\dot m_{in} - \dot Q_{out}
+\frac{dU_{gas}}{dt} = \frac{d\left(m_{gas}u_{gas}\right)}{dt} = h_{in}\dot m_{in} - \dot Q_{out}
 \end{equation}
 
 \todo{consistent time derivatives}
@@ -103,7 +105,7 @@ As the magnitude of heat transfer is related to the flow in forced convection, t
 c_4 =   ,  \quad c_5 = 
 \end{equation}
 
-The initial work this project builds upon uses the flow at the nozzle to determine the heat transfer at the wall of the cylinder. This assumes that the hydrogen flows instantaneously from the nozzle to the wall, when in reality there is of course a time delay. This assumption is acceptable for stable inflows, hence us referring to the steady state Nusselt's number ${Nu}_{f,ss}$,  but for more complex filling patterns and also for improved accuracy it becomes necessary to incorporate hysteresis. Indeed, the heat transfer coefficient at the wall in fact can be said to depend on the nozzle flow seconds prior, or more generally, on the history of the nozzle flow. This can be modeled as follows: \todo{Does this need to be cited / proved?}
+The initial work this project builds upon uses the flow at the nozzle to determine the heat transfer at the wall of the cylinder. This assumes that the hydrogen flows instantaneously from the nozzle to the wall, when in reality there is of course a time delay. This assumption is acceptable for stable inflows, hence us referring to the steady state Nusselt's number ${Nu}_{f,ss}$,  but for more complex filling patterns and also for improved accuracy it becomes necessary to incorporate hysteresis. Indeed, the heat transfer coefficient at the wall in fact can be said to depend on the nozzle flow seconds prior, or more generally, on the history of the nozzle flow. This can be modeled as follows: \todo{Does this need to be cited / proved? Eplain better so you dont have to cite it} 
 
 \begin{equation}
 \frac{d}{dt}\Big(\text{Nu}_f \Big) = \frac{\text{Nu}_{f,ss}-\text{Nu}_f}{\tau}
@@ -113,6 +115,12 @@ where $\tau$ is the time scale, which reflects the amount of time it takes for t
 \begin{equation}
 \tau = \text{min}\left(\tau_{prod},\tau_{diss}\right)
 \end{equation}
+
+% In order to model the flow we need to consider the fluid mechanics
+
+% in general, in recirculation flows, a recirculation time characterized by some length scale
+
+% Need to show that recirculation happens in L/D = 3.
 
 \noindent The production time scale is given by the spatial integral of the axial speed of the jet, which is given in \cref{equ:axialSpeed} in \cref{sec:turbulentJets}.
 
@@ -169,7 +177,7 @@ where $\tau$ is the time scale, which reflects the amount of time it takes for t
 c_9 = c_6 \frac{\nu\text{Nu}_f}{u_{exit}d} = c_4 c_6
 \end{equation}
 
-\noindent Which leads to a final definition of $\tau_{diss} in terms of literature constants:$:
+\noindent Which leads to a final definition of $\tau_{diss}$ in terms of literature constants:
 
 \begin{equation}
 \tau_{diss} = \frac{c_4}{2c_1}  \frac{L^2}{\nu \text{Nu}_f}
