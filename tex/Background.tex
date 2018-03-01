@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Challenges for compressed hydrogen storage for vehicles}
 
-
+\label{sec:challenges}
 
 Hydrogen is an attractive alternative fuel because it has zero carbon emissions at point of use. In order to exploit hydrogen on road vehicles it is necessary to have practical hydrogen storage and filling infrastructure.  Using liquid storage systems achieves high energy density but requires cryogenic cooling solutions. Metal hydrides are an emerging solution that still needs further development to compete with compressed hydrogen. This study focuses exclusively on compressed gas storage of hydrogen. In order to achieve high energy density very high pressures are required, 35 and 70 MPa being the standards. This hydrogen is then used in the fuel cell and converted into electricity, which can be used directly by the electric motor or stored in onboard batteries. The requirements of a compressed hydrogen system are: 
 
@@ -17,32 +17,29 @@ Hydrogen is an attractive alternative fuel because it has zero carbon emissions 
 \begin{itemize}
 \item High fuel capacity
 \item Low overall weight
-\item Low fill times
+\item Fast fill times
 \end{itemize}
 
-\noindent These goals have certain implications. First, it is clear that several tradeoffs and compromises must be made. Increasing fuel capacity can be done by either using larger tanks, which leads to higher weight, or using higher pressures, which inevitably leads to higher temperatures\todo{havent mentioned temperatures, make link more explicit, joule thompson and compression}. These higher temperatures are problematic due to material constraints as explained below in \cref{sec:materialConstraints}. Indeed, they lead to longer filling times as heat has to be allowed to dissipate through the tank walls. Thus, solutions must be developed to minimize the temperature rise when filling to high pressures.
+\noindent These goals have certain implications. First, it is clear that several tradeoffs and compromises must be made. Increasing fuel capacity can be done by either using larger tanks, which leads to higher weight, or using higher pressures. However, fast refueling of hydrogen gas to high pressures leads to a sharp increase in temperature due to the Joule Thompson effect and the quasi-adiabatic compression involved.
 
-% why things get hot and it may restrict the fill rate because in order to avoid exceded the tmep threshold of the material we may need to allow time for the heat to dissipate.
-
-% yes it gets hot, but how hot is it gonna get. 
-
-% Can prove this by showing tmep change with adiabatic filling
+ 
+These higher temperatures are problematic due to material constraints as explained below. This may restrict the fill rate because in order to avoid exceeding the temperature threshold of the material we may need to allow time for the heat to dissipate through the cylinder walls.
+ Thus, solutions must be developed to minimize the temperature rise when fast filling to high pressures.
 
 
-\subsubsection{Material constraints} \todo{reword shitty paragraph}
-\label{sec:materialConstraints}
-The main reason that a problem exists, and consequently this paper (and much other work) is being undertaken, is the material limitations that exist in hydrogen cylinders. Indeed, the cylinders that are used for high pressure scenarios such as the one we are presented with, are constructed with a composite material such as carbon fibre or glass/aramid fibre. In addition, they have a liner that is made out of metal, typically aluminum, in Type III cylinders, and out of a thermoplastic material for Type IV cylinders. Of concern is the composite material, as the polymer matrix cannot withstand high temperatures, and as such the material properties of the cylinder will begin to degrade. The specific temperature at which this occurs is usually around the glass transition temperature of the epoxy, where the thermosetting polymer changes from a hard "glassy" state to a more compliant "rubbery" state. \todo{cite: http://www.epotek.com/site/files/Techtips/pdfs/tip23.pdf} 
+
+\todo{yes it gets hot, but how hot is it gonna get. Can prove this by showing temp change with adiabatic filling}
+
+% OLD STUFF Indeed, they lead to longer filling times as heat has to be allowed to dissipate through the tank walls. The main reason that a problem exists, and consequently this paper (and much other work) is being undertaken, is the material limitations that exist in hydrogen cylinders. Indeed, the cylinders that are used for high pressure scenarios such as the one we are presented with, are constructed with a composite material such as carbon fibre or glass/aramid fibre.In addition, they have a liner that is made out of metal, typically aluminum, in Type III cylinders, and out of a thermoplastic material for Type IV cylinders. 
+ 
+Currently, the two main types of cylinder used are: Type III cylinders, made out of an aluminum liner wrapped in a carbon-fiber/epoxy composite, and Type IV cylinders, with a plastic liner and the same composite wrap. Of concern is the composite material, as the polymer matrix cannot withstand high temperatures, and as such the material properties of the cylinder will begin to degrade. The specific temperature at which this occurs is usually around the glass transition temperature of the epoxy, where the thermosetting polymer changes from a hard "glassy" state to a more compliant "rubbery" state. \todo{cite: http://www.epotek.com/site/files/Techtips/pdfs/tip23.pdf} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Previous work}
 
-% Dont use we, nor must. Too grandious. Slightly superflous. Scene setting sentance is alright.
-
 This section begins with  a summary of previous work concerning heat transfer during fast filling of hydrogen cylinders and concludes with an analysis for the need for more research. 
-
-% Dont use word shortcoming
 
 % OLD STUFF: We must first establish a baseline of previous work that has been conducted in this field, and subsequently analyze the shortcomings that exist in order to direct the research.
 
@@ -67,15 +64,17 @@ Several papers describe experimental work that has been conducted regarding the 
 % Why is it bad
 % What about it is useful
 
-A large amount of research has been conducted using multidimensional analysis, especially using \gls{cfd}. Indeed, there are many papers describing different methods and setups, such as Dicken and M\'erida's work, which uses the standard  k-$\epsilon$ turbulence model and the Redlich-Kwong real gas equation of state for real gas properties \cite{Dicken2007a}. 
+A large amount of research has been conducted using multidimensional analysis, especially using \gls{cfd}. Both 2D axisymmetric models and full 3D models have been developed my many authors.2D models will not include the effects of gravity or buoyancy, but these can be considered negligible, and the computational expense of full 3D simulations is rarely justifiable as the gains in accuracy are very small. 
+
+There are many papers describing different methods and setups, such as Dicken and M\'erida's work, which uses the standard  k-$\epsilon$ turbulence model and the Redlich-Kwong real gas equation of state for real gas properties \cite{Dicken2007a}. 
 Other investigations use more advanced property models, such as the one presented by Zhao et al., which employs REFPROP (see Section \ref{sec:property_models}) in order to have more precise real gas properties \cite{Zhao2012}.
 
-\paragraph{Zonal simulations}
+\paragraph{Zonal model}
 
 % Be specific about which type. Lumped model or zonal.
 % Axisymmetry is a reduced dimension.
 
-Less work has been conducted regarding reduced order simulations, which employ assumptions such as axisymmetry or uniform gas temperature. 
+Less work has been conducted regarding zonal models. A zonal model, also referred to as a 0-dimensional or reduced order model, considers the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations and much lower computational time.   
 
 Woodfield et al \cite{Woodfield2008} coupled a single zone model of the gas in the cylinder with a one dimensional unsteady model for the heat conduction through the cylinder walls. They used the Lee-Kesler method \cite{Lee1975} to find the compressibility and thus the density and from that the mass inside the cylinder.\todo{double check if true} The heat transfer coefficient between the gas and the wall was assumed to be constant: 500 W/(m$^2$K) during filling and 250 W/(m$^2$K) after full. 
 
@@ -113,6 +112,7 @@ Similarly, the work by Monde et al \cite{Monde2007} uses the same assumption reg
 
 % Paper by sandia labs
 
+A similar model is presented by Johnson et al \cite{Johnson2015}. While using a proprietary software called Netflow developed by Sandia Labs \todo{cite} a zonal model of the cylinder is created using the same internal energy and mass balance formulation. It considers three different control volumes for the gas: each of the two half domes and the strictly cylindrical section of the tank. Furthermore, it utilizes the Reynold's number of the jet to dynamically calculate the Nusselt's number, and thus the heat transfer coefficient, at the wall.
 
 \subsubsection{Analysis}
 
@@ -148,77 +148,86 @@ For instance, they \todo{who is they} assume a homogenous gas temperature, which
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Cylinder filling models}
 
-Several ways of modelling the cylinder can be considered when analysing their filling, with varying complexity and accuracy.
+% ED: I think it would be reasonable to absorb section 2.3 into 2.2.2.
 
-\subsubsection{Zonal}
 
-A zonal model, also referred to as a 0-dimensional or reduced order model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations and much lower computational time.   \todo{Fill}
+ % OLD STUFF: \subsection{Cylinder filling models}
 
-\subsubsection{Multidimensional}
-\label{sec:multidimensional}
+%Several ways of modelling the cylinder can be considered when analysing their filling, with varying complexity and accuracy.
 
-More complex multidimensional models can be created, either 2D axisymmetric models or full 3D models. 2D models will not include the effects of gravity or buoyancy, but these can be considered negligible, and the computational expense of full 3D simulations is rarely justifiable as the gains in accuracy are very small. \todo{fill}
+%\subsubsection{Zonal}
+
+%A zonal model, also referred to as a 0-dimensional or reduced order model, refers to models that consider the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations and much lower computational time.   \todo{Fill}
+
+%\subsubsection{Multidimensional}
+%\label{sec:multidimensional}
+
+%More complex multidimensional models can be created, either 2D axisymmetric models or full 3D models. 2D models will not include the effects of gravity or buoyancy, but these can be considered negligible, and the computational expense of full 3D simulations is rarely justifiable as the gains in accuracy are very small. \todo{fill}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\todo{turbulent jet sis fluid mechanics not heat transfer, rename to physicsy stuff or soemthing?}
-\subsection{Heat transfer models}
+% ED:   I think the reader might not understand why you are talking about heat transfer in impinging jets etc until you have isolated the modelling problems you are dealing with. If you don?t use this stuff then I think it will end up looking out of place. It depends where the focus of what you are doing is. Will you focus on unsteadiness effects ? if so, is there discussion of unsteady heat transfer in these configurations? Will you focus on speeding up the calculation and production of the most useful practical predictive tool? Will you focus on how best to include phase change materials?
+% ED:  I think 2.5 ?Methodology? could be absorbed into the formulation (3) and modelling (2.2) sections. There is not really novelty in the numerical methods or the physical models you are using. I would point out what kind of physical models the other modelling studies used as and when you introduce the modelling studies. In the Formulation section you can then refer back to the studies mentioned in 2.2 as you say which models you chose and why. I would move the numerical methods stuff to Formulation ? these methods are pretty standard, even if new to a Part 3 undergrad.
 
-In order to successfully analyse the behaviour of the system as a whole we must consider several local heat transfer methods that occur at different places inside of the cylinder.
+%\todo{turbulent jet sis fluid mechanics not heat transfer, rename to physicsy stuff or soemthing?}
+%OLD STUFF
+%\subsection{Heat transfer models}
+%
+%In order to successfully analyse the behaviour of the system as a whole we must consider several local heat transfer methods that occur at different places inside of the cylinder.
+%
+%
+%
+%\subsubsection{Impinging jet}
+%
+% The first behaviour that we will consider is that of an impinging jet of fluid onto a surface. 
+% 
+% 
+% \begin{figure}[H]
+%\begin{centering}
+%\caption{Impinging jet}
+%\label{fig:inpinging_jet}
+%\end{centering}
+%\end{figure}
+%
+%
+% 
+%\subsubsection{Pipe flow}
+%
+%A second behaviour that we will consider is that of pipe flow. This behaviour has been the focus of much research, as it is arguably the most common mode of heat transfer that occurs in fluid systems.
 
-
-
-\subsubsection{Impinging jet}
-
- The first behaviour that we will consider is that of an impinging jet of fluid onto a surface. 
- 
- 
- \begin{figure}[H]
-\begin{centering}
-\caption{Impinging jet}
-\label{fig:inpinging_jet}
-\end{centering}
-\end{figure}
-
-
- 
-\subsubsection{Pipe flow}
-
-A second behaviour that we will consider is that of pipe flow. This behaviour has been the focus of much research, as it is arguably the most common mode of heat transfer that occurs in fluid systems.
-
-\subsubsection{Turbulent Jets}
-\label{sec:turbulentJets}
-We must also consider turbulent jets, as the main driver of flow in the cylinder, which in turn drives convective heat transfer, is the turbulent jet that develops from the end of the nozzle throughout the length of the cylinder. Experimental results can be used to derive expressions for the axial velocity of the jet. Radial profiles of  mean axial velocity can be seen in \cref{fig:radialProfile}.
-
-\begin{figure}[H]
-\begin{centering}
-\caption{Radial profiles of mean axial velocity in a turbulent round jet with Re = 95,000. Adapted from \cite{pope2000} with the data from \cite{hussein1994}}
-\label{fig:radialProfile}
-\end{centering}
-\end{figure}
-
-
-\noindent By plotting the inverse of the non-dimensional speed, $u_{exit}/u(x)$ against $x/d$ we get the clearly linear relationship shown in \cref{fig:jetSpeed}.
-
-\begin{figure}[H]
-\begin{centering}
-\caption{Jet speed vs distance. Adapted from \cite{pope2000} with the data from \cite{hussein1994}}
-\label{fig:jetSpeed}
-\end{centering}
-\end{figure}
-
-\noindent From this experimental result the following relationship is obtained: 
-\begin{equation}
-\label{equ:axialSpeed}
-\frac{u(x)}{u_{exit}} = \frac{c_1}{\left(x-x_0\right)/d_{inlet}}
-\end{equation}
-
-\noindent where $u(x)$ is the axial velocity at a distance $x$ from the nozzle, $x_0$ is the position of the virtual origin, and $c_1$ is an empirical constant.
+%OLD STUFF
+% \subsubsection{Turbulent Jets}
+%\label{sec:turbulentJets}
+%We must also consider turbulent jets, as the main driver of flow in the cylinder, which in turn drives convective heat transfer, is the turbulent jet that develops from the end of the nozzle throughout the length of the cylinder. Experimental results can be used to derive expressions for the axial velocity of the jet. Radial profiles of  mean axial velocity can be seen in \cref{fig:radialProfile}.
+%
+%\begin{figure}[H]
+%\begin{centering}
+%\caption{Radial profiles of mean axial velocity in a turbulent round jet with Re = 95,000. Adapted from \cite{pope2000} with the data from \cite{hussein1994}}
+%\label{fig:radialProfile}
+%\end{centering}
+%\end{figure}
+%
+%
+%\noindent By plotting the inverse of the non-dimensional speed, $u_{exit}/u(x)$ against $x/d$ we get the clearly linear relationship shown in \cref{fig:jetSpeed}.
+%
+%\begin{figure}[H]
+%\begin{centering}
+%\caption{Jet speed vs distance. Adapted from \cite{pope2000} with the data from \cite{hussein1994}}
+%\label{fig:jetSpeed}
+%\end{centering}
+%\end{figure}
+%
+%\noindent From this experimental result the following relationship is obtained: 
+%\begin{equation}
+%\label{equ:axialSpeed}
+%\frac{u(x)}{u_{exit}} = \frac{c_1}{\left(x-x_0\right)/d_{inlet}}
+%\end{equation}
+%
+%\noindent where $u(x)$ is the axial velocity at a distance $x$ from the nozzle, $x_0$ is the position of the virtual origin, and $c_1$ is an empirical constant.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -227,8 +236,7 @@ We must also consider turbulent jets, as the main driver of flow in the cylinder
 
 Several techniques and methods will be used throughout the analysis. These are described in this section.
 
-\subsubsection{Optimization}
-\todo{Fill Section once work on optimization starts.}
+
 \subsubsection{Non-dimensioning}
 
 One of the fundamental principles used throughout this paper, and indeed, throughout engineering, is that of non-dimensioning. By operating using non-dimensional parameters such as the Reynolds number $\text{Re} = \frac{\rho u L}{v}$ or the Prandtl number $\text{Pr} = \frac{c_p \mu}{k}$ solving problems involving differential equations becomes simplified. Also, the analysis becomes much more general, and can be scaled.

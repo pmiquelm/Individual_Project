@@ -5,9 +5,7 @@
 % Governing equation for mass and internal energy
 %dm/dt du/dt
 
-\subsection{Governing equation}
-
-%dm/dt = m in
+\subsection{Governing equations}
 
 The governing equation for mass and internal energy of the gas in the tank is given by:
 
@@ -21,6 +19,13 @@ The governing equation for mass and internal energy of the gas in the tank is gi
 
 The change in internal energy of the gas is equal to the difference in energy entering the system in the enthalpy of gas inflow and the energy leaving the system through the walls of the cylinder. The enthalpy of the inlet can be determined from real gas models as a function of the inlet pressure and temperature. Therefore, to obtain the internal energy variation one must calculate the gas mass flow and the heat transferred to the cylinder.
 
+We also have conservation of mass in the system, which is expressed simply by:
+
+\begin{equation}
+\frac{dm_{gas}}{dt} = \dot m_{in}
+\end{equation}
+
+\noindent as the change in mass of the gas in the cylinder is only influenced by the influx of gas during filling.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,13 +121,42 @@ where $\tau$ is the time scale, which reflects the amount of time it takes for t
 \tau = \text{min}\left(\tau_{prod},\tau_{diss}\right)
 \end{equation}
 
-% In order to model the flow we need to consider the fluid mechanics
-
+% ED: In order to model the flow we need to consider the fluid mechanics
 % in general, in recirculation flows, a recirculation time characterized by some length scale
-
 % Need to show that recirculation happens in L/D = 3.
 
-\noindent The production time scale is given by the spatial integral of the axial speed of the jet, which is given in \cref{equ:axialSpeed} in \cref{sec:turbulentJets}.
+
+\paragraph{Production time scale}
+
+The main driver of flow in the cylinder, which in turn drives convective heat transfer, is the turbulent jet that develops from the end of the nozzle throughout the length of the cylinder. Experimental results can be used to derive expressions for the axial velocity of the jet. Radial profiles of  mean axial velocity can be seen in \cref{fig:radialProfile}.
+
+\begin{figure}[H]
+\begin{centering}
+\caption{Radial profiles of mean axial velocity in a turbulent round jet with Re = 95,000. Adapted from \cite{pope2000} with the data from \cite{hussein1994}}
+\label{fig:radialProfile}
+\end{centering}
+\end{figure}
+
+
+\noindent By plotting the inverse of the non-dimensional speed, $u_{exit}/u(x)$ against $x/d$ we get the clearly linear relationship shown in \cref{fig:jetSpeed}.
+
+\begin{figure}[H]
+\begin{centering}
+\caption{Jet speed vs distance. Adapted from \cite{pope2000} with the data from \cite{hussein1994}}
+\label{fig:jetSpeed}
+\end{centering}
+\end{figure}
+
+\noindent From this experimental result the following relationship is obtained: 
+\begin{equation}
+\label{equ:axialSpeed}
+\frac{u(x)}{u_{exit}} = \frac{c_1}{\left(x-x_0\right)/d_{inlet}}
+\end{equation}
+
+\noindent where $u(x)$ is the axial velocity at a distance $x$ from the nozzle, $x_0$ is the position of the virtual origin, and $c_1$ is an empirical constant.
+
+
+The production time scale is given by the spatial integral of the axial speed of the jet, which is given in \cref{equ:axialSpeed} in \cref{sec:turbulentJets}.
 
 \begin{equation}
 \begin{aligned}
@@ -143,7 +177,8 @@ where $\tau$ is the time scale, which reflects the amount of time it takes for t
 \tau_{prod} = c_6 \frac{L^2}{u_{exit} d}
 \end{equation}
 
-\noindent The dissipation time scale can be said to be proportional to the length of the cylinder $L$ and the recirculation velocity $u_{recirc}$: \todo{ need to explain why?}
+\paragraph{Dissipation time scale}
+The dissipation time scale can be said to be proportional to the length of the cylinder $L$ and the recirculation velocity $u_{recirc}$: \todo{ need to explain why?}
 
 \begin{equation}
 \tau_{diss} = c_7 \frac{L}{u_{recirc}}
@@ -186,10 +221,19 @@ c_9 = c_6 \frac{\nu\text{Nu}_f}{u_{exit}d} = c_4 c_6
 \noindent Therefore, in a pure dissipation scenario, where $\text{Nu}_{f,ss} \rightarrow 0$, we have:
 
 \begin{equation}
-\frac{d}{dt}\Big(\text{Nu}_f \Big) = -\text{Nu}_f^2  \frac{2c_1}{c_4}\frac{\nu}{LD}
+\frac{d}{dt}\Big(\text{Nu}_f \Big) = -\text{Nu}_f^2  \frac{2c_1}{c_4}\frac{\nu}{L^2}
 \end{equation}
 
-\noindent Thus, when the inflow stops the heat transfer at the wall will decrease quadratically.
+\noindent which can be solved by simple integration, which yields:
+
+\begin{equation}
+\int - \frac{dNu_f}{Nu_f^2} = \int \frac{2c_1}{c_4} \frac{\nu}{L^2} dt
+\end{equation}
+
+\begin{equation}
+Nu_f = \frac{c_4}{2c_1} \frac{L^2}{\nu} \frac{1}{t}
+\end{equation}
+
 
 \subsubsection{Natural convection}
 \label{sec:naturalConvection}
@@ -224,15 +268,44 @@ c_{10} =   ,  \quad c_{11} =
 
 The main mode of heat transfer that occurs in the cylinder and that will be used throughout this report is heat conduction through the wall of the cylinder. This is modeled using:
 \begin{equation}
+\label{equ:heatEquation}
 \frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T }{\partial x^2}
 \end{equation}
-where $\alpha$ is the thermal diffusivity, as defined in \cref{equ:thermalDiffusivity}. This differential equation will be solved using forward Euler time integration as described in Section \ref{sec:numerical_methods}. Solving this equation will yield the temperature distribution throughout the thickness of the cylinder wall, and more specifically, the internal wall temperature that is used to calculate the heat transferred out of the gas in \cref{equ:convection}.
+where $\alpha$ is the thermal diffusivity, as defined in \cref{equ:thermalDiffusivity}. The boundary condition at the inner wall can be described by equalling the heat flux into the wall from convection to the conduction through the wall:
 
+\begin{equation}
+\label{equ:innerWallBC}
+k \frac{dT_w}{dx} \bigg\rvert_{x=0} = h A \left( T_{gas} - T_{wall} \right)
+\end{equation}
 
-\subsubsection{Discretization}
-
+Solving this equation will yield the temperature distribution throughout the thickness of the cylinder wall, and more specifically, the internal wall temperature that is used to calculate the heat transferred out of the gas in \cref{equ:convection}.
 
 \subsubsection{Outer Wall}
+
+\subsubsection{Discretisation}
+
+In order to solve the heat equation \gls{pde} presented in \cref{equ:heatEquation} a discretisation method must be employed. The scheme employed is known as \gls{ftcs}. 
+
+\begin{equation}
+\frac{T_{i+1,j} - T_{i,j}}{\Delta t} = \alpha \frac{T_{i,j+1}-2T_{i,j} + T_{i,j-1}}{\Delta x^2}
+\end{equation}
+
+\noindent where the $i$ and $j$ subscripts represent the nodes of the discretisation in time and space, respectively, $\Delta t$ is the time step, and $\Delta x$ is the distance between grid points. This can be rearanged for $ T_{i+1,j}$ and substituting $r = \frac{\alpha \Delta t}{ \Delta x^2}$, we have:
+
+\begin{equation}
+T_{i+1,j}= T_{i,j} +  r \left(T_{i,j+1}-2T_{i,j} + T_{i,j-1} \right)
+\end{equation}
+
+We can also apply the discretisation scheme on the boundary conditions. For the inner wall boundary condition expressed in \cref{equ:innerWallBC} we can write:
+
+\begin{equation}
+T_{i+1,j}= T_{i,j} + 2r\left(T_{i,j+1} - T_{i,j} + \frac{\Delta x h \left( T_{gas} - T_{i,j}\right) }{k_{lin}}\right)
+\end{equation}
+
+
+\begin{equation}
+T_{i+1,j}= T_{i,j} + \frac{\Delta t}{\Delta x^2} \left( \frac{k_{lam} \left(T_{i,j+1} - T_{i,j} \right) - k_{lin} \left(T_{i,j} - T_{i,j-1} \right)}{0.5 \left( C_{lin} \rho_{lin} + C_{lam} \rho_{lam} \right)} \right)
+\end{equation}
 
 
 
@@ -241,7 +314,7 @@ where $\alpha$ is the thermal diffusivity, as defined in \cref{equ:thermalDiffus
 
 \subsection{Throttling}
 
-Throttling is introduced in order to more accurately represent real life conditions. When a maximum temperature is reached, the inflow of hydrogen must be stopped in order to protect the materials of the tank, as detailed in \cref{sec:materialConstraints}. A simple method of throttling, with the flow stopping at the designated maximum temperature, 85 \degree C, and the flow restarting at a chosen temperature. The optimum temperature at which flow restarts was considered in this study, and results are presentedl in \cref{sec:throttlingResults}
+Throttling is introduced in order to more accurately represent real life conditions. When a maximum temperature is reached, the inflow of hydrogen must be stopped in order to protect the materials of the tank, as detailed in \cref{sec:challenges}. A simple method of throttling, with the flow stopping at the designated maximum temperature, 85 \degree C, and the flow restarting at a chosen temperature. The optimum temperature at which flow restarts was considered in this study, and results are presented in \cref{sec:throttlingResults}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
