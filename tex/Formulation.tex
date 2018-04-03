@@ -1,9 +1,10 @@
 % !TEX root = ../Individual_Project.tex
 % Formulation
 
-
 % Governing equation for mass and internal energy
 %dm/dt du/dt
+\todo{Out of place, where to put it}
+One of the fundamental principles used throughout this paper, and indeed, throughout engineering, is that of non-dimensioning. By operating using non-dimensional parameters such as the Reynolds number $\text{Re} = \frac{\rho u L}{v}$ or the Prandtl number $\text{Pr} = \frac{c_p \mu}{k}$ solving problems involving differential equations becomes simplified. Also, the analysis becomes much more general, and can be scaled.
 
 \subsection{Governing equations}
 
@@ -27,6 +28,15 @@ We also have conservation of mass in the system, which is expressed simply by:
 
 \noindent as the change in mass of the gas in the cylinder is only influenced by the influx of gas during filling.
 
+One of the simplest methods available to solve this system of \glspl{ode}, both conceptually and in terms of ease of implementing in code, is forward Euler time integration. It can be described as follows: given a function that can be defined by: 
+\begin{equation}
+y'(t) = f(t,y(t)), \quad y(t_0) = y_0
+\end{equation}
+we can compute the approximate shape of the function given the initial point and finding the slope of the curve for small intervals. Indeed, from the initial point, we can find the tangent of the curve at that point, and take a small step along that tangent until arriving at the next point, where the procedure can be repeated. Denoting the step size as $h$, we can express forward Euler time integration as:
+\begin{equation}
+y_{n+1} =  y_n + hf(t_n,y_n)
+\end{equation}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -36,14 +46,14 @@ The nozzle and corresponding gas flow will be modeled using isentropic relations
 
 \begin{equation}
 \label{equ:reynoldsIdeal}
-\text{Re}_{\text{ideal}} = \frac{\rho_{exit}\;d_{inlet}\;u_{exit}}{\mu_{exit}}
+\text{Re}_{\text{jet,ideal}} = \frac{\rho_{exit}\;d_{inlet}\;u_{exit}}{\mu_{exit}}
 \end{equation}
 where $d_{\text{inlet}}$ is the diameter of the inlet delivery pipe and  $\rho_{\text{exit}}$, $u_{\text{exit}}$, and $\mu_{\text{exit}}$ are determined using real gas models as described in Section \ref{sec:property_models}. More specifically:
 
 \begin{equation}
 \rho_{exit} =  f\left(P_{exit}, S_{in}\right), \quad u_{exit} = \sqrt{2\left(H_{in} - H_{static}\right)}, \quad\mu_{exit}= f\left(P_{exit}, S_{in}\right)
 \end{equation}
-where $P_{exit}$ is the pressure at the end of the inlet tube, $S_{in}$ is the entropy at the inlet, $H_{in}$ the stagnation enthalpy at the inlet, $H_{static}$ the static enthalpy at the end of the inlet tube. As the system is treated as isentropic, the inlet entropy can be used to calculate exit properties. We also have:
+where $P_{exit}$ is the pressure at the end of the inlet tube, $S_{in}$ is the entropy at the inlet, $H_{in}$ the stagnation enthalpy at the inlet, $H_{static}$ the static enthalpy at the end of the inlet tube, and the function $f$ represents the real gas model which computes a thermodynamic property from any two given properties. As the system is initially treated as isentropic, the inlet entropy can be used to calculate exit properties. We also have:
 
 \begin{equation}
 S_{in} = f\left( P_{in}, T_{in} \right), \quad H_{in} = f\left( P_{in}, T_{in} \right), \quad H_{static} = f\left( P_{exit}, S_{in} \right)
@@ -54,7 +64,7 @@ S_{in} = f\left( P_{in}, T_{in} \right), \quad H_{in} = f\left( P_{in}, T_{in} \
 In order to find the real mass flow an empirical discharge coefficient is employed.
 
 \begin{equation}
-C_D = \frac{\dot{m}_{in}}{\dot{m}_{ideal}} = c_2+ c_3 \:\text{Re}_{ideal} 
+C_D = \frac{\dot{m}_{in}}{\dot{m}_{ideal}} = c_2+ c_3 \:\text{Re}_{jet,ideal} 
 \end{equation}
 A discharge coefficient must be used to account for the formation of a boundary layer inside the inlet tube. The empirical model that was used was obtained from \todo{Citation}, and uses the following values:
 
@@ -64,7 +74,7 @@ c_2 =  0.938 ,  \quad c_3 = -2.71
 From the real mass flow the actual Reynold's number of the inflow can be calculated and used to find forced convection heat transfer coefficients in \cref{sec:forcedConvection,equ:nusseltReynolds} as follows: \todo{avoid forward references}
 
 \begin{equation}
-\text{Re} = \frac{4\dot m_{in}}{\pi \mu d}
+\text{Re}_{jet} = \frac{4\dot m_{in}}{\pi \mu d}
 \end{equation}
 
 
@@ -86,31 +96,31 @@ where $A$ is the internal surface area of the cylinder, $h$ is the heat transfer
 h = \sqrt[4]{h_f^4 + h_n^4} 
 \end{equation}
 
-\noindent where $h_f$ is the heat transfer coefficient due to forced convection and $h_n$ is the heat transfer coefficient due to natural convection. Each coefficient can be non-dimensionalised using Nusselt's numbers, expressed as:
+\noindent where $h_f$ is the heat transfer coefficient due to forced convection and $h_n$ is the heat transfer coefficient due to natural convection. Each coefficient can be non-dimensionalised using Nusselt numbers, expressed as:
 
 \begin{equation}
 \text{Nu}_f = \frac{h_f D}{k}, \quad \text{Nu}_n = \frac{h_n D}{k}
 \end{equation}
 
-\noindent where $D$ is the characteristic length, in this case the diameter of the cylinder, and $k$, the thermal conductivity of the fluid. The values of the Nusselt's numbers can be determined from empirical correlations, as detailed in \cref{sec:forcedConvection,sec:naturalConvection}.
+\noindent where $D$ is the characteristic length, in this case the diameter of the cylinder, and $k$, the thermal conductivity of the fluid. The values of the Nusselt numbers can be determined from empirical correlations, as detailed in \cref{sec:forcedConvection,sec:naturalConvection}.
 
 \subsubsection{Forced convection}
 \label{sec:forcedConvection}
-As the magnitude of heat transfer is related to the flow in forced convection, the Nusselt's number can be said to be a function of the Reynolds number, taking the form:
+As the magnitude of heat transfer is related to the flow in forced convection, the Nusselt number can be said to be a function of the Reynolds number, taking the form:
 
 \begin{equation}
 \label{equ:nusseltReynolds}
-\text{Nu}_{f,ss} = c_4 \text{Re} ^{c_5}
+\text{Nu}_{f,ss} = c_4 \text{Re}_{jet} ^{c_5}
 \end{equation}
 
-\noindent where ${Nu}_{f,ss}$ is the steady state Nusselt's number and the empirical constants $c_4$ and $c_5$ are given by \todo{cite} as:
+\noindent where ${Nu}_{f,ss}$ is the steady state Nusselt number and the empirical constants $c_4$ and $c_5$ are given by \todo{cite} as:
 
 \begin{equation}
 \label{equ:nusseltReynoldsConsts}
 c_4 =   ,  \quad c_5 = 
 \end{equation}
 
-The initial work this project builds upon uses the flow at the nozzle to determine the heat transfer at the wall of the cylinder. This assumes that the hydrogen flows instantaneously from the nozzle to the wall, when in reality there is of course a time delay. This assumption is acceptable for stable inflows, hence us referring to the steady state Nusselt's number ${Nu}_{f,ss}$,  but for more complex filling patterns and also for improved accuracy it becomes necessary to incorporate hysteresis. Indeed, the heat transfer coefficient at the wall in fact can be said to depend on the nozzle flow seconds prior, or more generally, on the history of the nozzle flow. This can be modeled as follows: \todo{Does this need to be cited / proved? Eplain better so you dont have to cite it} 
+The initial work this project builds upon uses the flow at the nozzle to determine the heat transfer at the wall of the cylinder. This assumes that the hydrogen flows instantaneously from the nozzle to the wall, when in reality there is of course a time delay. This assumption is acceptable for stable inflows, hence us referring to the steady state Nusselt number ${Nu}_{f,ss}$,  but for more complex filling patterns and also for improved accuracy it becomes necessary to incorporate hysteresis. Indeed, the heat transfer coefficient at the wall in fact can be said to depend on the nozzle flow seconds prior, or more generally, on the history of the nozzle flow. This can be modeled as follows: \todo{Does this need to be cited / proved? Eplain better so you dont have to cite it} 
 
 \begin{equation}
 \frac{d}{dt}\Big(\text{Nu}_f \Big) = \frac{\text{Nu}_{f,ss}-\text{Nu}_f}{\tau}
@@ -161,14 +171,14 @@ The production time scale is given by the spatial integral of the axial speed of
 \begin{equation}
 \begin{aligned}
 \tau_{prod} &= \int_{0}^{L} \frac{1}{u(x)} dx = \frac{1}{c_1 u_{exit}} \int_0^L \left( x - x_0 \right) dx \\[2ex]
- &= \frac{\frac{L^2}{2} - x_0L}{c_1du_{exit}}
+ &= \frac{\frac{L^2}{2} - x_0L}{c_1u_{exit}d}
 \end{aligned}
 \end{equation}
 
 \noindent As we have $x_0\ll L$ we can write:
 
 \begin{equation}
-\tau_{prod} = \frac{L^2}{2c_1du_{exit}}
+\tau_{prod} = \frac{L^2}{2c_1u_{exit}d}
 \end{equation}
 
 \noindent and defining $c_6 = \frac{1}{2c_1}$:
@@ -184,7 +194,14 @@ The dissipation time scale can be said to be proportional to the length of the c
 \tau_{diss} = c_7 \frac{L}{u_{recirc}}
 \end{equation}
 
-\noindent Let us assume that instantaneous Nusselt's number depends on $u_{recirc}$ as it depends on $\text{Re}^{c_5}$ and $c_5\sim\mathcal{O}(1)$. From \cref{equ:nusseltReynolds} we know that: 
+\noindent We can then define the Reynolds number of the recirculation flow as:
+
+\begin{equation}
+\text{Re}_{recirc} = \frac{u_{recirc} D}{\nu}
+\end{equation}
+
+
+\noindent Let us assume that instantaneous Nusselt number depends on $u_{recirc}$ as it depends on $\text{Re}^{c_5}$ and $c_5\sim\mathcal{O}(1)$. From \cref{equ:nusseltReynolds} we know that: 
 
 \begin{equation}
 \frac{D u_{recirc}}{\nu} = c_8 \text{Nu}_f
@@ -204,10 +221,10 @@ The dissipation time scale can be said to be proportional to the length of the c
 \noindent We can then make use of the fact that in steady state we know $\tau_{prod} = \tau_{diss}$, which leads to:
 
 \begin{equation}
-\tau_{diss} = c_9 \frac{L^2}{\nu \text{Nu}_f} = c_6 \frac{L^2}{u_{exit} d}
+c_9 \frac{L^2}{\nu \text{Nu}_f} = c_6 \frac{L^2}{u_{exit} d}
 \end{equation}
 
-\noindent  Substituting the definitions of Nusselt's and Reynolds numbers from \cref{equ:reynoldsIdeal,equ:nusseltReynolds}:
+\noindent  Substituting the definitions of Nusselt and Reynolds numbers from \cref{equ:reynoldsIdeal,equ:nusseltReynolds}:
 \begin{equation}
 c_9 = c_6 \frac{\nu\text{Nu}_f}{u_{exit}d} = c_4 c_6
 \end{equation}
@@ -227,7 +244,7 @@ c_9 = c_6 \frac{\nu\text{Nu}_f}{u_{exit}d} = c_4 c_6
 \noindent which can be solved by simple integration, which yields:
 
 \begin{equation}
-\int - \frac{dNu_f}{Nu_f^2} = \int \frac{2c_1}{c_4} \frac{\nu}{L^2} dt
+\int^{Nu(t)}_{Nu_{initial}} - \frac{dNu_f}{Nu_f^2} = \int^t_0 \frac{2c_1}{c_4} \frac{\nu}{L^2} dt
 \end{equation}
 
 \begin{equation}
@@ -238,7 +255,7 @@ Nu_f = \frac{c_4}{2c_1} \frac{L^2}{\nu} \frac{1}{t}
 \subsubsection{Natural convection}
 \label{sec:naturalConvection}
 
-Natural convection is caused by buoyancy driven flow, so the natural Nusselt's number can be found to be related to the Rayleigh's number (itself a product of Grashof's and Prandt's numbers) by the following relationship:
+Natural convection is caused by buoyancy driven flow, so the natural Nusselt number can be found to be related to the Rayleigh's number (itself a product of Grashof's and Prandt's numbers) by the following relationship:
 
 \begin{equation}
 \text{Nu}_n  = c_{10} \text{Ra}^{c_{11}}
@@ -263,10 +280,18 @@ c_{10} =   ,  \quad c_{11} =
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{figure}[H]
+\begin{centering}
+\caption{Diagram show composition of wall and heat fluxes into and out of wall.}
+\label{fig:wall}
+\end{centering}
+\end{figure}
+
 
 \subsection{Heat transfer across cylinder}
 
-The main mode of heat transfer that occurs in the cylinder and that will be used throughout this report is heat conduction through the wall of the cylinder. This is modeled using:
+The main mode of heat transfer that occurs in the cylinder and that will be used throughout this report is heat conduction through the wall of the cylinder. A diagram showing the heat transfer through the wall is shown in \cref{fig:wall}. The heat transfer is modeled using one dimensional unsteady heat conduction:
+
 \begin{equation}
 \label{equ:heatEquation}
 \frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T }{\partial x^2}
@@ -278,13 +303,31 @@ where $\alpha$ is the thermal diffusivity, as defined in \cref{equ:thermalDiffus
 k \frac{dT_w}{dx} \bigg\rvert_{x=0} = h A \left( T_{gas} - T_{wall} \right)
 \end{equation}
 
+For the boundary between the liner and the laminate a point precisely on the boundary is considered. At that point, the heat flux through the liner material and the heat flux through the laminate material and the respective temperatures must be equal:
+
+\begin{equation}
+\begin{aligned}
+k_{lin} \frac{\partial T_{lin}}{\partial x} &=  k_{lam} \frac{\partial T_{lam}}{\partial x} \\
+T_{lin} &= T_{lam}
+\end{aligned}
+\end{equation}
+
 Solving this equation will yield the temperature distribution throughout the thickness of the cylinder wall, and more specifically, the internal wall temperature that is used to calculate the heat transferred out of the gas in \cref{equ:convection}.
 
 \subsubsection{Outer Wall}
 
+Several cases can be considered for the outer wall, and the investigations described in \cref{sec:zonalModels} employ different boundary conditions. A constant heat flux can be applied to the outer wall, be it a constant heat loss or an adiabatic condition. The adiabatic condition represents the situation in which the cylinders are in an enclosed space which cannot transfer heat to the environment efficiently enough for it to affect he temperature of the tanks. this is the most conservative approach. Having a constant heat loss can be somewhat of an oversimplification, but a natural convection relationship could be employed to represent the heat loss to the environment in a more open environment. However, the approach used in this report will be the adiabatic condition, which can be expressed as follows:
+
+\begin{equation}
+\frac{\partial T_{C}}{\partial x} = 0
+\end{equation}
+
+\noindent where $T_{C}$ is the outer wall temperature.
+ 
+
 \subsubsection{Discretisation}
 
-In order to solve the heat equation \gls{pde} presented in \cref{equ:heatEquation} a discretisation method must be employed. The scheme employed is known as \gls{ftcs}. 
+In order to solve the heat equation \gls{pde} presented in \cref{equ:heatEquation} a discretisation method must be employed. The scheme employed is known as \gls{ftcs}, first described as such by Roache \cite{roache1976}. 
 
 \begin{equation}
 \frac{T_{i+1,j} - T_{i,j}}{\Delta t} = \alpha \frac{T_{i,j+1}-2T_{i,j} + T_{i,j-1}}{\Delta x^2}
@@ -296,10 +339,18 @@ In order to solve the heat equation \gls{pde} presented in \cref{equ:heatEquatio
 T_{i+1,j}= T_{i,j} +  r \left(T_{i,j+1}-2T_{i,j} + T_{i,j-1} \right)
 \end{equation}
 
-We can also apply the discretisation scheme on the boundary conditions. For the inner wall boundary condition expressed in \cref{equ:innerWallBC} we can write:
+The scheme is numerically stable if and only if \cite{smith1965}:
 
 \begin{equation}
-T_{i+1,j}= T_{i,j} + 2r\left(T_{i,j+1} - T_{i,j} + \frac{\Delta x h \left( T_{gas} - T_{i,j}\right) }{k_{lin}}\right)
+r = \frac{\alpha \Delta t}{ \Delta x^2} < \frac{1}{2}
+\end{equation}
+
+
+
+We can also apply the discretisation scheme on the boundary conditions. For the inner wall boundary condition expressed in \cref{equ:innerWallBC} we can write: \todo{finish}
+
+\begin{equation}
+T_{i+1,j}= T_{i,j} + 2r\left(T_{i,j+1} - T_{i,j} + \frac{\Delta x \; h \left( T_{gas} - T_{i,j}\right) }{k_{lin}}\right)
 \end{equation}
 
 
@@ -320,6 +371,40 @@ Throttling is introduced in order to more accurately represent real life conditi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Optimization}
+
+The optimization was realized using a constrained nonlinear multivariable minimiser. It accepts problems in the following form:
+
+\begin{equation}
+min f(x) \; \text{such that} \;
+  \begin{cases}
+	 c(x)              & \leq 0      \\
+	ceq(x)           & =     0      \\
+	A \cdot x       & \leq b       \\
+	Aeq \cdot x   & =     beq  \\
+	lb \leq          x & \leq ub  \\
+  \end{cases}
+\end{equation}
+
+\noindent where $x$ is the input variable; $A$ and $Aeq$, and  $b$ and $beq$ are matrices and vectors respectively which describe the linear constraints, $c(x)$ and $ceq(x)$ are nonlinear functions constraining $x$, and $lb$ and $ub$ are vectors which describe the upper and lower bounds of the problem \cite{fmincon}.
+
+The optimization problem for the hydrogen filling can be expressed as follows:
+\begin{equation}
+min f(x)  \; \text{such that} \; c(x) \leq 85
+\end{equation}
+
+\noindent where $f(x)$ returns the fill time given inlet pressure profile parameters $x$, and $c(x)$ returns the maximum temperature reached by the gas inside the cylinder during the duration of the fill. The parameters $x$ described can create several profiles:
+
+\begin{itemize}
+\item $ x = m $ , $ P(t) = mt + P_0$ 
+\item $ x = [A, B, C] $ , $P(t) = A \cdot \text{sin}\left(\frac{2 \pi}{B} t\right) + Ct$
+\item $ x = [A, B, C,D] $ , $P(t) = A \cdot g\left(\frac{2 \pi}{B} t, C\right) + Dt$, where $g(x,d)$ creates a square wave with duty cycle $d$.
+\item $ x = \left[P_1, P_2, ..., P_n\right] $ , $P(t) = h\left(P_1, P_2, ..., P_n\right)$ where $h([P])$ is a spline interpolating function.
+\end{itemize}
+
+\noindent By specifying which type profile will be used, the optimiser will take the initial parameters, find the fill time and maximum temperature, and use finite differences to find the partial derivatives $\frac{\partial f}{\partial x_i}$ and $\frac{\partial c}{\partial x_i}$. From there, the interior point algorithm \cite{interiorPoint} will choose a new set of parameters, and repeat the process. This will continue until the first order optimality, that is, a measure of how close to a local minimum the objective function is \cite{firstOrderOpt}, reaches a given threshold.
+
+
+
 
 \todo{General stuff: \\
 - Check tense and person \\

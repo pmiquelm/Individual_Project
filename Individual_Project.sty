@@ -22,7 +22,7 @@
 \RequirePackage{filecontents}
 \RequirePackage{booktabs}
 \RequirePackage{multirow}
-\RequirePackage[style=ieee, backend=biber]{biblatex}
+\RequirePackage[bibstyle=ieee, citestyle=numeric-comp, backend=biber]{biblatex}
 \addbibresource{Individual_Project.bib}
 \RequirePackage[labelfont=sc,font=small, margin=\parindent]{caption}
 \RequirePackage{verbatim}
@@ -56,7 +56,7 @@
 \RequirePackage{setspace}
 \onehalfspacing
 \RequirePackage[linktoc=all]{hyperref}
-\RequirePackage[nonumberlist,, acronyms, nopostdot]{glossaries}
+\RequirePackage[nonumberlist, acronyms, nopostdot,nogroupskip]{glossaries}
 \loadglsentries{tex/Acronyms.tex}
 \makenoidxglossaries
 \RequirePackage{csquotes}
@@ -67,7 +67,6 @@
 \RequirePackage[capitalise]{cleveref}
 \graphicspath{{./figs/}}
 \RequirePackage{float}
-
 \numberwithin{equation}{section}
 
 

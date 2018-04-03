@@ -6,11 +6,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Challenges for compressed hydrogen storage for vehicles}
+
+\subsection{Challenges of hydrogen fuelled for vehicles}
 
 \label{sec:challenges}
 
-Hydrogen is an attractive alternative fuel because it has zero carbon emissions at point of use. In order to exploit hydrogen on road vehicles it is necessary to have practical hydrogen storage and filling infrastructure.  Using liquid storage systems achieves high energy density but requires cryogenic cooling solutions. Metal hydrides are an emerging solution that still needs further development to compete with compressed hydrogen. This study focuses exclusively on compressed gas storage of hydrogen. In order to achieve high energy density very high pressures are required, 35 and 70 MPa being the standards. This hydrogen is then used in the fuel cell and converted into electricity, which can be used directly by the electric motor or stored in onboard batteries. The requirements of a compressed hydrogen system are: 
+Hydrogen is an attractive alternative fuel because it has zero carbon emissions at point of use. In order to exploit hydrogen on road vehicles it is necessary to have practical hydrogen storage and filling infrastructure. Three different technologies have been developed so far: liquid storage systems, metal hydrides, and compressed hydrogen solutions. Liquid storage systems achieve high energy density but require cryogenic cooling solutions, and metal hydrides are an emerging solution that still needs further development to compete with compressed hydrogen. Therefore, this study focuses exclusively on compressed gas storage of hydrogen. To achieve high energy density very high pressures are required, 35 and 70 MPa being the standards. This compressed hydrogen is then used in the fuel cell of the vehicles and converted into electricity, which can be used directly by the electric motor or stored in onboard batteries. The requirements of a compressed hydrogen system are: 
 
 % OLD STUFF: First, we must consider what the real-world relevance of this project is. As explained in Section \ref{sec:introduction}, the hydrogen cylinders being considered are for road vehicles.  Although still an emerging technology, the basic functioning of a hydrogen fueled vehicle is relatively well established. They store compressed hydrogen in fuel tanks at high pressures, 35 and 70 MPa being the two current standards.  It therefore follows that the objectives of the hydrogen storage system are: \todo{None of this really follows}
 
@@ -20,11 +21,9 @@ Hydrogen is an attractive alternative fuel because it has zero carbon emissions 
 \item Fast fill times
 \end{itemize}
 
-\noindent These goals have certain implications. First, it is clear that several tradeoffs and compromises must be made. Increasing fuel capacity can be done by either using larger tanks, which leads to higher weight, or using higher pressures. However, fast refueling of hydrogen gas to high pressures leads to a sharp increase in temperature due to the Joule Thompson effect and the quasi-adiabatic compression involved.
+%These goals have certain implications. First, it is clear that several tradeoffs and compromises must be made. 
 
- 
-These higher temperatures are problematic due to material constraints as explained below. This may restrict the fill rate because in order to avoid exceeding the temperature threshold of the material we may need to allow time for the heat to dissipate through the cylinder walls.
- Thus, solutions must be developed to minimize the temperature rise when fast filling to high pressures.
+\noindent Increasing fuel capacity can be achieved by either using larger tanks, which leads to higher weights, or by using higher pressures. However, fast refueling of hydrogen gas to high pressures leads to a sharp increase in gas temperature due to the Joule-Thompson effect and the quasi-adiabatic compression involved. These higher temperatures are problematic due to material constraints as explained below. This may restrict the fill rate because to avoid exceeding the temperature threshold of the material we may need to allow time for the heat to dissipate through the cylinder walls. Thus, solutions must be developed to minimize the temperature rise when fast filling to high pressures.
 
 
 
@@ -32,7 +31,7 @@ These higher temperatures are problematic due to material constraints as explain
 
 % OLD STUFF Indeed, they lead to longer filling times as heat has to be allowed to dissipate through the tank walls. The main reason that a problem exists, and consequently this paper (and much other work) is being undertaken, is the material limitations that exist in hydrogen cylinders. Indeed, the cylinders that are used for high pressure scenarios such as the one we are presented with, are constructed with a composite material such as carbon fibre or glass/aramid fibre.In addition, they have a liner that is made out of metal, typically aluminum, in Type III cylinders, and out of a thermoplastic material for Type IV cylinders. 
  
-Currently, the two main types of cylinder used are: Type III cylinders, made out of an aluminum liner wrapped in a carbon-fiber/epoxy composite, and Type IV cylinders, with a plastic liner and the same composite wrap. Of concern is the composite material, as the polymer matrix cannot withstand high temperatures, and as such the material properties of the cylinder will begin to degrade. The specific temperature at which this occurs is usually around the glass transition temperature of the epoxy, where the thermosetting polymer changes from a hard "glassy" state to a more compliant "rubbery" state. \todo{cite: http://www.epotek.com/site/files/Techtips/pdfs/tip23.pdf} 
+Currently, two types of cylinder used are: Type III cylinders, made out of an aluminum liner wrapped in a carbon-fiber/epoxy composite, and Type IV cylinders, with a plastic liner and the same composite wrap. \hl{Of concern} is the composite material, as the polymer matrix cannot withstand high temperatures, and the material properties of the cylinder will begin to degrade. The specific temperature at which this occurs is usually around the glass transition temperature of the epoxy, where the thermosetting polymer changes from a hard ``glassy" state to a more compliant ``rubbery" state. \todo{cite: http://www.epotek.com/site/files/Techtips/pdfs/tip23.pdf} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,12 +49,10 @@ Several papers describe experimental work that has been conducted regarding the 
 
 % Why do you think that is
 
-% Just becuase they all filled it doens't man it's all the same. Is there a reason why it's different, is the fact that they're different mean that one discredits the other
+% Just becuase they all filled it doens't mean it's all the same. Is there a reason why it's different, is the fact that they're different mean that one discredits the other
 
-\subsubsection{Modeling Work}
-\label{sec:modelingWork}
-
-\paragraph{\gls{cfd}}
+\subsubsection{\Acrfull{cfd} models}
+\label{sec:cfdModels}
 
 % is this about cylinder filling?
 % Add more references 
@@ -63,30 +60,45 @@ Several papers describe experimental work that has been conducted regarding the 
 % what can it do for you?
 % Why is it bad
 % What about it is useful
+\todo{Deal with CFD shit} 
+A large amount of research has been conducted using multidimensional analysis, especially using \gls{cfd}. Both 2D axisymmetric models and full 3D models have been developed by many authors. 2D models do not include the effects of gravity or buoyancy, but these can be considered negligible. On the other hand, full 3D simulations are computationally expensive and rarely justifiable as the gain in accuracy is very small. 
 
-A large amount of research has been conducted using multidimensional analysis, especially using \gls{cfd}. Both 2D axisymmetric models and full 3D models have been developed my many authors.2D models will not include the effects of gravity or buoyancy, but these can be considered negligible, and the computational expense of full 3D simulations is rarely justifiable as the gains in accuracy are very small. 
+There are many papers describing slightly different methods and setups. The models attempt to solve the Reynolds averaged Navier Stokes equations, which are time averaged equations representing the fluid flow. As these equations are not closed, models for the turbulent viscosity term must be utilised.
 
-There are many papers describing different methods and setups, such as Dicken and M\'erida's work, which uses the standard  k-$\epsilon$ turbulence model and the Redlich-Kwong real gas equation of state for real gas properties \cite{Dicken2007a}. 
-Other investigations use more advanced property models, such as the one presented by Zhao et al., which employs REFPROP (see Section \ref{sec:property_models}) in order to have more precise real gas properties \cite{Zhao2012}.
+Kim et al \cite{Kim2010} propose a 3D model with a standard  k-$\epsilon$ turbulence model \cite{Launder1974} and the Redlich-Kwong real gas equation of state \cite{Redlich1949} for real gas properties. Dicken and M\'erida \cite{Dicken2007a} present an axisymmetric model that uses a modified standard k-$\epsilon$ turbulence model in order to reduce the jet's spreading rate over-prediction of the standard model.
 
-\paragraph{Zonal model}
+Other investigations use more advanced property models, such as the one presented by Zhao et al \cite{Zhao2012}, which employs REFPROP, a tool developed by the National Institute of Standards and Technology \cite{refprop}, in order to have more precise real gas properties. It uses values of critical and triple points together with equations for the thermodynamic and transport properties to calculate the state points of fluids.  Zhao et al's model is validated against experimental results by Zheng et al \cite{Zheng2013}. In the same spirit, other authors employ more advanced turbulence modelling, such as Heitsch et al's model \cite{Heitsch2011} which uses Menter's Shear Stress Transport turbulence model \cite{Menter1994}.
+
+Galassi et al \cite{Galassi2012} present a 3D model using a modified  k-$\epsilon$ turbulence model and the Redlich-Kwong real gas equation of state similar to the work by Kim et al \cite{Kim2010}. Melideo et al \cite{Melideo2014} compare an axisymmetric model with this full 3D model and find a very good agreement in the temperature profile, suggesting that the significant extra computation expense of full 3D models might not be necessary. They also use the improved Aungier Redlich Kwang real gas equation of state \cite{Aungier1995} for improved speed and accuracy.
+
+Most models are built upon existing commercial CFD codes, mainly CFX \cite{cfx}, used by references \cite{Galassi2012,Melideo2014,Heitsch2011} and FLUENT \cite{fluent}, used by references \cite{Zheng2013,Dicken2007a,Zhao2012,Kim2010}. 
+
+
+\subsubsection{Zonal models}
+\label{sec:zonalModels}
 
 % Be specific about which type. Lumped model or zonal.
 % Axisymmetry is a reduced dimension.
 
-Less work has been conducted regarding zonal models. A zonal model, also referred to as a 0-dimensional or reduced order model, considers the gas inside the cylinder as the control volume, with homogenous properties. This allows for simpler calculations and much lower computational time.   
+Zonal models, also referred to as a 0-dimensional or reduced order models, consider the gas inside the cylinder as the control volume with homogenous properties. This premise allows for simpler calculations and much lower computational time.
 
-Woodfield et al \cite{Woodfield2008} coupled a single zone model of the gas in the cylinder with a one dimensional unsteady model for the heat conduction through the cylinder walls. They used the Lee-Kesler method \cite{Lee1975} to find the compressibility and thus the density and from that the mass inside the cylinder.\todo{double check if true} The heat transfer coefficient between the gas and the wall was assumed to be constant: 500 W/(m$^2$K) during filling and 250 W/(m$^2$K) after full. 
+Liu et al \cite{liu2010} assume adiabatic filling of the cylinder. By applying the first law of thermodynamics, they equalled the change in internal energy of the gas to the change in the product of mass and static enthalpy. By then using real gas equations of state, they obtain a simple algebraic equation relating the final temperature in the cylinder to the initial temperature, initial and final pressures.x
+
+Hosseini et al \cite{Hosseini2012} also assume adiabatic filling of the cylinder in addition to a constant mass flow rate in order to simplify the first law of thermodynamics to an \todo{not capital}\gls{ode}. It is solved for internal energy as a function of static enthalpy of the inlet gas, initial specific internal energy, mass flow rate, initial mass, and time. The internal energy can be substituted for a real gas equation to get an expression for temperature as a function of time.
+
+Early work regarding the filling of \gls{cng} tanks involves very similar thermodynamics to hydrogen filling. Kountz \cite{Kountz1994} presented a model which linked an energy balance for the gas to a lumped mass heat conduction model for the cylinder. It used a constant heat transfer coefficient of 28 W/(m$^2$K), although it must be noted that \gls{cng} cylinders are filled to lower pressures and during longer fill times.
+
+Woodfield et al \cite{Woodfield2008} coupled a single zone model of the gas in the cylinder with a one dimensional unsteady model for the heat conduction through the cylinder walls. They used the Lee-Kesler method \cite{Lee1975} to find the compressibility and thus the density, and from that the mass inside the cylinder.\todo{double check if true} The heat transfer coefficient between the gas and the wall was assumed to 500 W/(m$^2$K) during filling and 250 W/(m$^2$K) after full. 
 
 % OLD STUFF: The work by Woodfield et al \cite{Woodfield2008} presents a reduced order model employing a mass flow and internal energy balance for the compressed gas and one-dimensional unsteady heat conduction equation for the wall solved simultaneously.
 
 % similarly uses the same
 
-Similarly, the work by Monde et al \cite{Monde2007} uses the same assumption regarding heat transfer coefficient values.  They achieve a reasonable fit with experimental data, shown in \cref{fig:mondeFit}, even though the measured heat transfer coefficients were significantly lower, shown in \cref{tab:mondeHValues}.
+Similarly, the work by Monde et al \cite{Monde2007} uses the same assumption regarding heat transfer coefficient values.  They achieve a reasonable fit with experimental data, shown in \cref{fig:mondeFit}, even though the measured heat transfer coefficients were significantly lower, as shown in \cref{tab:mondeHValues}.
 
 \begin{figure}[H]
 \begin{center}
-\caption{Comparison between estimated and measured temperatures by Monde et al \cite{Monde2007}}
+\caption{Comparison between estimated and measured temperatures by Monde et al \cite{Monde2007}.}
 \label{fig:mondeFit}
 \end{center}
 \end{figure}
@@ -106,15 +118,24 @@ Similarly, the work by Monde et al \cite{Monde2007} uses the same assumption reg
     \bottomrule
   \end{tabular}
 \end{small}
-\caption{Heat transfer coefficents at various conditions by Monde et al \cite{Monde2007}}
+\caption{Heat transfer coefficients at various conditions by Monde et al \cite{Monde2007}.}
 \label{tab:mondeHValues}
 \end{table}
 
-% Paper by sandia labs
 
-A similar model is presented by Johnson et al \cite{Johnson2015}. While using a proprietary software called Netflow developed by Sandia Labs \todo{cite} a zonal model of the cylinder is created using the same internal energy and mass balance formulation. It considers three different control volumes for the gas: each of the two half domes and the strictly cylindrical section of the tank. Furthermore, it utilizes the Reynold's number of the jet to dynamically calculate the Nusselt's number, and thus the heat transfer coefficient, at the wall.
+Monde et al \cite{Monde2012} used newly published test data to validate their model presented in reference \cite{Monde2007}. While the model matches the data reasonably well, different values of heat transfer coefficient have to be employed to achieve a good fit, with recommended values of 150 W/(m$^2$K) and 200 W/(m$^2$K) for filling to 35 MPa and 70 MPa, respectively. 
 
-\subsubsection{Analysis}
+Striednig at al \cite{Striednig2014} developed a whole-station model linking zero-dimensional \hl{models} for the storage tank gas, the vehicle tank gas, and the vehicle cylinder. They propose using an annular flow correlation to relate the Nusselt number to the Reynolds number of the flow to dynamically calculate the heat transfer at the wall. However, as they were comparing against data with a Type I cylinder (complete steel construction) they assumed constant temperature through the thickness of the cylinder wall, an assumption which isn't valid for Type III and IV cylinders due to the low thermal conductivity of carbon fiber. 
+
+Monde and Woodfield \cite{Woodfield2010} also presented an improved model with a dynamic heat transfer coefficient. The energy balance in the gas is coupled to an unsteady heat conduction equation for the wall. The Nusselt number was derived as a function of Reynolds and Rayleigh numbers by means of an empirical correlation derived from experimental results they presented in reference \cite{Woodfield2007}.
+ 
+A similar model is presented by Johnson et al \cite{Johnson2015}. While using a proprietary software called Netflow developed by Sandia Labs, \todo{cite} a zonal model of the cylinder is created using the same internal energy and mass balance formulation. It considers three different control volumes for the gas: each of the two half domes and the strictly cylindrical section of the tank. Furthermore, it utilizes the Reynolds number of the jet to dynamically calculate the Nusselt number, and thus the heat transfer coefficient, at the wall. The coefficients for these empirical relationships are derived from their experimental results.
+
+Ranong et al \cite{Ranong2011} present a model with a single zone model for the gas and unsteady heat conduction through the wall. They develop a relationship between Nusselt and Reynolds numbers based upon \gls{cfd} simulations also presented in that paper. Using this relationship, the heat transfer coefficient is dynamically calculated.
+
+Finally, Khan et al \cite{Khan2009} analyzed different tank sizes and optimised fueling characteristics by using the model presented by Monde and Woodfield in references \cite{Woodfield2008,Monde2007,Monde2012}. They use a constant heat transfer coefficient, and make an attempt to evaluate the feasibilty of step-filling. However, the analysis is hindered by the lack of unsteady modelling of the heat transfer coefficient.
+
+\subsubsection{Summary and outlook}
 
 % Are the models that we have right? 
 % Are they as quick as they could be?
@@ -124,30 +145,39 @@ A similar model is presented by Johnson et al \cite{Johnson2015}. While using a 
 % Therefore it's just constrained by geometric properties
 % CFD deals better with hysteresis and geometry
 
-The simulation work that has been conducted can be, in broad terms, divided into complex \gls{cfd} models and more simplified reduced dimensional models. It is important to analyze the difference between these two systems. 
+
+The simulation work that has been presented in this section, in broad terms, divided into complex \gls{cfd} models and more simplified reduced dimensional models. It is important to analyze the difference between these two approaches. 
+
+\todo{Number of degrees of freedom, cells}
 
 
-% Number of degrees of freedom, cells 
+\Gls{cfd} models have several advantages, as they take into consideration many details that reduced order models must assume, simplify, orneglect. Firstly, one can represent the specific effects of geometry of the cylinder more accurately using \gls{cfd}. Secondly, time effects can be directly simulated without the need of timescales \todo{never mentioned before} to be modelled. However, they are extremely computationally expensive, with run times lasting from hours to weeks. It thus follows that the main advantage of reduced dimension models is that they are much less computationally expensive. This, in turn, means they can be incorporated as a part of larger analyses, in which they must be run multiple times, such as optimization routines or probabilistic whole station models.
 
+In compressed hydrogen fuel systems the gas is at very high pressures, meaning ideal gas approximations are inaccurate, and thus real gas properties must be employed. Several methods are employed in existing work as outlined in \cref{sec:zonalModels}. Most use real gas equations of state, which although very accurate, are less accurate than property models. Property models determine any gas property from two other independent properties. The property model that will be employed throughout this analysis is REFPROP.  Although the use of REFPROP is fairly established in \gls{cfd} models \cite{Zhao2012,Zheng2013,Johnson2015}, it is less prominent in reduced order simulations.
 
-\Gls{cfd} models have several advantages, as they take into consideration many things which reduced order models must simplify, neglect or assume. Firstly, one can represent the specific effects of geometry of the cylinder more accurately using \gls{cfd}. Secondly, time effects can be directly simulated without the need of timescales \todo{never mentioned before} to be modelled. However, they are extremely computationally expensive, with run times lasting from hours to weeks. It thus follows that the main advantage of reduced dimension models is that they are much less computationally expensive. This, in turn, means they can be incorporated as a part of larger analyses, in which they must be run multiple times, such as optimization routines or probabilistic whole station models.
+Reduced dimension models up to date make assumptions that are not always supported with evidence, and therefore \todo{do I have evidence} lead to less accurate results. This requires adjustments to the model to match the experimental data, such as the case of Monde et al \cite{Monde2012}, explained in \cref{sec:zonalModels}. Although this produces a better fit, the model is less predictive. For this reason, it is important to improve reduced order models by devising ways to \hl{obtain} quantities previously assumed. This will improve the models' predictive ability, which will increase confidence in results from simulations regarding events which haven't been tried experimentally.
 
-% Ar ethese adjustemtns specific?
+%For instance, several \todo{who is many} assume a homogenous gas temperature, which, as outlined in Section \ref{sec:experimental_work}, is supported by some experimental work, but other work suggests in some circumstances it isn't. For this reason, more research should be conducted to validate the uniform gas temperature approximation. 
 
-Reduced dimension models up to date make assumptions that are difficult to support with evidence, and therefore \todo{do I have evidence} lead to results not being very accurate. This leads to adjustments being made to the model to match the experimental data from the same experiment, which produces a better fit for the model, but leads to a less predictive model. For this reason, it is important to improve reduced order models by devising ways to calculate quantities previously assumed. This will improve the models' predictive ability, which will increase confidence in results from simulations regarding events which haven't been tried experimentally.
-
-
-% Not really refuted. in some circumstances it's possible it isn't homogenous.
-
-For instance, they \todo{who is they} assume a homogenous gas temperature, which, as outlined in Section \ref{sec:experimental_work}, is supported by some experimental work, but refuted by others. For this reason, more research should be conducted to validate the uniform gas temperature approximation. Another assumption typically made is a constant heat transfer coefficient derived from time-averaged experimental results, as explained in \cref{sec:modelingWork}. This report will propose a new method of deriving the heat transfer coefficient numerically to achieve better results.
+An assumption typically made is that of a constant heat transfer coefficient derived from either time-averaged experimental results or \gls{cfd} simulations, as explained in \cref{sec:zonalModels}. A slightly better assumption employed is that of deriving the heat transfer coefficient from the inlet Reynolds number by means of empirical correlations. However, work conducted so far has used a quasi steady approach to modelling the heat transfer coefficient. This implies either assuming a constant heat transfer coefficient, or deriving it from the instantaneous Reynolds number of the inlet flow. However, for \hl{rapid transients}, this approach will not work, as the changes in the inflow will inaccurately result in immediate changes to the heat transfer conditions. This report will propose a new method of deriving the unsteady heat transfer coefficient numerically to achieve better results for transient convective heat transfer. 
 
 % Novelty is that it's unsteady
-% I'm saying that other people used a quasi steady approach using instantaneous, in rapid transients, that's not gonna work./
+% I'm saying that other people used a quasi steady approach using instantaneous; in rapid transients, that's not gonna work./
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 % ED: I think it would be reasonable to absorb section 2.3 into 2.2.2.
 
@@ -232,33 +262,32 @@ For instance, they \todo{who is they} assume a homogenous gas temperature, which
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Methodology}
+%\subsection{Methodology}
+%
+%Several techniques and methods will be used throughout the analysis. These are described in this section.
 
-Several techniques and methods will be used throughout the analysis. These are described in this section.
 
 
-\subsubsection{Non-dimensioning}
 
-One of the fundamental principles used throughout this paper, and indeed, throughout engineering, is that of non-dimensioning. By operating using non-dimensional parameters such as the Reynolds number $\text{Re} = \frac{\rho u L}{v}$ or the Prandtl number $\text{Pr} = \frac{c_p \mu}{k}$ solving problems involving differential equations becomes simplified. Also, the analysis becomes much more general, and can be scaled.
+%\subsubsection{Numerical methods}
+%\label{sec:numerical_methods}
+%\paragraph{Integrating \glspl{ode}}
+%
+%A central part of solving unsteady heat transfer problems involves integrating \glspl{ode}, as will be seen in Section \ref{sec:formulation}. One of the simplest methods available, both conceptually and in terms of ease of implementing in code, is forward Euler time integration. It can be described as follows: given a function that can be defined by: 
+%\begin{equation}
+%y'(t) = f(t,y(t)), \quad y(t_0) = y_0
+%\end{equation}
+%we can compute the approximate shape of the function given the initial point and finding the slope of the curve for small intervals. Indeed, from the initial point, we can find the tangent of the curve at that point, and take a small step along that tangent until arriving at the next point, where the procedure can be repeated. Denoting the step size as $h$, we can express forward Euler time integration as:
+%\begin{equation}
+%y_{n+1} =  y_n + hf(t_n,y_n)
+%\end{equation}
 
-\subsubsection{Numerical methods}
-\label{sec:numerical_methods}
-\paragraph{Integrating \glspl{ode}}
 
-A central part of solving unsteady heat transfer problems involves integrating \glspl{ode}, as will be seen in Section \ref{sec:formulation}. One of the simplest methods available, both conceptually and in terms of ease of implementing in code, is forward Euler time integration. It can be described as follows: given a function that can be defined by: 
-\begin{equation}
-y'(t) = f(t,y(t)), \quad y(t_0) = y_0
-\end{equation}
-we can compute the approximate shape of the function given the initial point and finding the slope of the curve for small intervals. Indeed, from the initial point, we can find the tangent of the curve at that point, and take a small step along that tangent until arriving at the next point, where the procedure can be repeated. Denoting the step size as $h$, we can express forward Euler time integration as:
-\begin{equation}
-y_{n+1} =  y_n + hf(t_n,y_n)
-\end{equation}
-
-\paragraph{Property models}
-\label{sec:property_models}
-As the gases that are being treated in this report are at very high pressures, ideal gas approximations are inaccurate, and thus real gas properties must be employed. To this end, property models must be used, which can determine any gas property from two other independent properties.
-
-The property model that will be employed throughout this analysis is REFPROP, a tool developed by the National Institute of Standards and Technology \cite{refprop}. It uses values of critical and triple points together with equations for the thermodynamic and transport properties to calculate the state points of fluids.
+%\paragraph{Property models}
+%\label{sec:property_models}
+%As the gases that are being treated in this report are at very high pressures, ideal gas approximations are inaccurate, and thus real gas properties must be employed. To this end, property models must be used, which can determine any gas property from two other independent properties.
+%
+%The property model that will be employed throughout this analysis is REFPROP, a tool developed by the National Institute of Standards and Technology \cite{refprop}. It uses values of critical and triple points together with equations for the thermodynamic and transport properties to calculate the state points of fluids.
 
 
 
